@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title>シンガポール旅行プラン 2026.5.23-26</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -1303,6 +1304,26 @@
 <div class="footer">シンガポール旅行プラン 2026.05.23〜26 ｜ SQ671/672 ｜ Wyndham Singapore Hotel × MBS 楽天ダイヤモンド特典フル活用</div>
 
 <script>
+// 期限切れチェック（2026年6月1日以降は非表示）
+(function() {
+  const expiry = new Date('2026-06-01T00:00:00+09:00');
+  if (new Date() > expiry) {
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.innerHTML = `
+        <div style="
+          min-height:100vh; display:flex; align-items:center; justify-content:center;
+          background:#f0f4f8; font-family:'Hiragino Kaku Gothic ProN',sans-serif;
+        ">
+          <div style="text-align:center; padding:40px; background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.1); max-width:360px;">
+            <div style="font-size:48px; margin-bottom:16px;">✈️</div>
+            <h2 style="color:#1a3a5c; margin-bottom:12px;">旅行お疲れさまでした！</h2>
+            <p style="color:#718096; font-size:14px; line-height:1.7;">このページは旅行終了のため<br>2026年6月1日をもって無効化しました。</p>
+          </div>
+        </div>`;
+    });
+  }
+})();
+
 // チェックボックス
 function toggleCheck(el) { el.classList.toggle('done'); }
 
