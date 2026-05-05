@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シンガポール旅行プラン 2026.5.23-26</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      background: #f0f4f8; color: #2d3748;
+    }
+
+    /* ヒーロー */
+    .hero {
+      background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 55%, #c8851a 100%);
+      color: white; padding: 40px 24px 36px; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-emoji { font-size: 44px; display: block; margin-bottom: 8px; position: relative; }
+    .hero h1 { font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 6px; position: relative; }
+    .hero .subtitle { font-size: 13px; opacity: 0.9; letter-spacing: 1px; position: relative; }
+    .hero-meta { display: flex; justify-content: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; position: relative; }
+    .hero-meta span { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 12px; font-size: 11px; }
+
+    /* ラウンジセクション */
+    .lounge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media(max-width:600px){ .lounge-grid { grid-template-columns: 1fr; } }
+    .lounge-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .lounge-header { padding: 12px 16px; color: white; font-weight: 700; font-size: 13px; }
+    .lounge-header.dep-lounge { background: linear-gradient(135deg, #1a3a5c, #2d6a9f); }
+    .lounge-header.ret-lounge { background: linear-gradient(135deg, #0f4c35, #16a34a); }
+    .lounge-body { padding: 14px 16px; }
+    .lounge-name { font-size: 15px; font-weight: 800; color: #1a3a5c; margin-bottom: 4px; }
+    .lounge-sub { font-size: 11px; color: #718096; margin-bottom: 12px; }
+    .lounge-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 7px; font-size: 12px; }
+    .lounge-row .lr-icon { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+    .lounge-row .lr-label { font-weight: 700; color: #2d3748; min-width: 64px; }
+    .lounge-row .lr-val { color: #4a5568; line-height: 1.5; }
+    .lounge-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0f4f8; }
+    .ltag { font-size: 11px; padding: 2px 8px; border-radius: 8px; font-weight: 600; }
+    .ltag-ok { background: #c6f6d5; color: #276749; }
+    .ltag-shower { background: #bee3f8; color: #1a4a72; }
+    .ltag-no { background: #e2e8f0; color: #718096; }
+    .ltag-tip { background: #fefcbf; color: #744210; }
+    .lounge-timeline { background: #f7fafc; border-radius: 10px; padding: 12px 14px; margin-top: 12px; }
+    .lt-title { font-size: 12px; font-weight: 700; color: #1a3a5c; margin-bottom: 8px; }
+    .lt-row { display: flex; gap: 8px; align-items: baseline; margin-bottom: 5px; font-size: 12px; }
+    .lt-time { font-weight: 700; color: #2d3748; min-width: 52px; white-space: nowrap; }
+    .lt-desc { color: #4a5568; line-height: 1.5; }
+
+    .container { max-width: 880px; margin: 0 auto; padding: 24px 16px 60px; }
+
+    .section { margin-bottom: 32px; }
+    .section-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; margin-bottom: 14px; color: #1a3a5c; }
+    .section-title .icon { width: 32px; height: 32px; background: #1a3a5c; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+
+    /* フライト情報 */
+    .flight-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media(max-width: 560px){ .flight-cards { grid-template-columns: 1fr; } }
+    .flight-card {
+      background: white; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .flight-card-header {
+      padding: 10px 16px; font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .flight-card-header.dep { background: linear-gradient(135deg, #1a3a5c, #2d6a9f); color: white; }
+    .flight-card-header.ret { background: linear-gradient(135deg, #744ba2, #5a3d7a); color: white; }
+    .flight-card-body { padding: 14px 16px; }
+    .flight-route { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .flight-city { text-align: center; }
+    .flight-city .code { font-size: 22px; font-weight: 900; color: #1a3a5c; }
+    .flight-city .time { font-size: 18px; font-weight: 800; color: #2d3748; }
+    .flight-city .name { font-size: 10px; color: #a0aec0; margin-top: 2px; }
+    .flight-line { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .flight-line .fl-num { font-size: 11px; font-weight: 700; color: #4a5568; }
+    .flight-line .fl-bar { width: 100%; height: 2px; background: linear-gradient(to right, #1a3a5c, #c8851a); border-radius: 2px; position: relative; }
+    .flight-line .fl-bar::after { content: '✈'; position: absolute; right: -4px; top: -9px; font-size: 14px; color: #c8851a; }
+    .flight-line .fl-dur { font-size: 10px; color: #a0aec0; }
+    .flight-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+    .flight-tag { font-size: 11px; background: #f0f4f8; border-radius: 6px; padding: 3px 8px; color: #4a5568; }
+
+    /* アラートボックス */
+    .alert { border-radius: 10px; padding: 12px 15px; margin-bottom: 12px; font-size: 13px; line-height: 1.7; }
+    .alert-red { background: #fff5f5; border-left: 4px solid #e53e3e; }
+    .alert-yellow { background: #fffff0; border-left: 4px solid #d69e2e; }
+    .alert-blue { background: #ebf8ff; border-left: 4px solid #3182ce; }
+    .alert-green { background: #f0fff4; border-left: 4px solid #38a169; }
+    .alert strong { font-weight: 700; }
+
+    /* 地図 */
+    #map { width: 100%; height: 480px; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .map-legend {
+      background: white; border-radius: 10px; padding: 12px 16px; margin-top: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+    /* 交通手段 */
+    .transport-tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .transport-tab {
+      padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 700;
+      cursor: pointer; border: 2px solid transparent; transition: all 0.2s;
+      background: white; color: #718096;
+    }
+    .transport-tab.active { background: #1a3a5c; color: white; border-color: #1a3a5c; }
+    .transport-panel { display: none; }
+    .transport-panel.active { display: block; }
+
+    .route-table { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .route-row { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; border-bottom: 1px solid #f0f4f8; }
+    .route-row:last-child { border-bottom: none; }
+    .route-header { background: #1a3a5c; color: white; }
+    .route-cell { padding: 11px 14px; font-size: 13px; }
+    .route-header .route-cell { font-size: 12px; font-weight: 700; }
+    .route-row:not(.route-header):hover { background: #f7fafc; }
+    .rec { color: #276749; font-weight: 700; }
+    .warn { color: #c05621; font-weight: 600; }
+
+    .transport-tip {
+      background: white; border-radius: 12px; padding: 16px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-top: 14px;
+    }
+    .transport-tip h4 { font-size: 14px; font-weight: 700; color: #1a3a5c; margin-bottom: 10px; }
+    .tip-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #f0f4f8; }
+    .tip-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .tip-label { font-size: 12px; font-weight: 700; min-width: 100px; padding-top: 2px; }
+    .tip-body { font-size: 12px; color: #4a5568; line-height: 1.6; flex: 1; }
+    .mrt-badge { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; color: white; margin-right: 4px; }
+    .mrt-ns { background: #e53e3e; }
+    .mrt-ew { background: #38a169; }
+    .mrt-cc { background: #d69e2e; }
+    .mrt-te { background: #744210; }
+
+    /* 推奨ルートカード */
+    .recommended-routes { display: flex; flex-direction: column; gap: 10px; }
+    .rec-route {
+      background: white; border-radius: 12px; padding: 14px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .rec-route-icon { font-size: 22px; flex-shrink: 0; }
+    .rec-route-body { flex: 1; }
+    .rec-route-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; color: #2d3748; }
+    .rec-route-detail { font-size: 12px; color: #718096; line-height: 1.6; }
+    .route-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+    .rtag { font-size: 11px; padding: 2px 7px; border-radius: 6px; font-weight: 600; }
+    .rtag-mrt { background: #c6f6d5; color: #276749; }
+    .rtag-grab { background: #bee3f8; color: #2a4365; }
+    .rtag-walk { background: #e9d8fd; color: #553c9a; }
+    .rtag-price { background: #feebc8; color: #7b341e; }
+
+    /* チェックリスト */
+    .checklist { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 18px; border-bottom: 1px solid #f0f4f8; cursor: pointer; transition: background 0.15s; }
+    .check-item:last-child { border-bottom: none; }
+    .check-item:hover { background: #f7fafc; }
+    .check-box { width: 22px; height: 22px; border: 2px solid #cbd5e0; border-radius: 5px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .check-item.urgent .check-box { border-color: #e53e3e; }
+    .check-item.done .check-box { background: #48bb78; border-color: #48bb78; color: white; }
+    .check-item.done .check-box::after { content: '✓'; font-size: 13px; font-weight: 700; }
+    .check-item.done .check-label strong { text-decoration: line-through; color: #a0aec0; }
+    .check-label { flex: 1; }
+    .check-label strong { display: block; font-size: 14px; font-weight: 600; }
+    .check-label span { font-size: 12px; color: #718096; margin-top: 2px; display: block; line-height: 1.5; }
+    .badge-urgent { background: #fed7d7; color: #c53030; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+    .badge-normal { background: #e2e8f0; color: #4a5568; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+    .badge-info { background: #bee3f8; color: #2a4365; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+
+    /* 楽天ガイド */
+    .rakuten-guide { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .rakuten-header { background: linear-gradient(135deg, #bf0000, #e53e3e); color: white; padding: 13px 18px; font-weight: 700; font-size: 15px; }
+    .rakuten-body { padding: 16px 18px; }
+    .rakuten-step { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+    .step-num { width: 26px; height: 26px; background: #bf0000; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; }
+    .step-content { flex: 1; }
+    .step-content strong { font-size: 14px; display: block; margin-bottom: 3px; }
+    .step-content span { font-size: 12px; color: #718096; line-height: 1.6; }
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+    .benefit-item { background: #fff5f5; border: 1px solid #fed7d7; border-radius: 8px; padding: 10px 12px; text-align: center; }
+    .benefit-item .b-icon { font-size: 20px; margin-bottom: 4px; }
+    .benefit-item .b-label { font-size: 11px; color: #718096; }
+    .benefit-item .b-val { font-size: 13px; font-weight: 700; color: #c53030; }
+    .english-phrase { background: #1a3a5c; color: #90cdf4; border-radius: 6px; padding: 8px 12px; font-family: monospace; font-size: 12px; margin-top: 6px; line-height: 1.7; }
+    .caution-list { list-style: none; margin-top: 10px; }
+    .caution-list li { font-size: 12px; color: #744210; background: #fffbeb; border-radius: 6px; padding: 6px 10px 6px 24px; margin-bottom: 6px; position: relative; line-height: 1.5; }
+    .caution-list li::before { content: '⚠️'; position: absolute; left: 4px; }
+
+    /* AP Cafe */
+    .ap-info { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); overflow: hidden; margin-bottom: 16px; }
+    .ap-header { background: linear-gradient(135deg, #1a1a2e, #16213e); color: #e2c07a; padding: 13px 18px; font-size: 14px; font-weight: 700; }
+    .ap-body { padding: 14px 18px; }
+    .ap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .ap-cell { background: #f7fafc; border-radius: 8px; padding: 10px 12px; }
+    .ap-cell .ac-label { font-size: 11px; color: #718096; margin-bottom: 3px; }
+    .ap-cell .ac-val { font-size: 13px; font-weight: 600; line-height: 1.4; }
+    .menu-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f4f8; font-size: 13px; }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-price { color: #c53030; font-weight: 700; font-size: 12px; }
+
+    /* 日程カード */
+    .day-card { background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 24px; }
+    .day-header { padding: 14px 20px; color: white; display: flex; align-items: center; gap: 14px; }
+    .day-header.day1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .day-header.day2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+    .day-header.day3 { background: linear-gradient(135deg, #4facfe, #00c6ff); }
+    .day-number { font-size: 34px; font-weight: 900; opacity: 0.3; line-height: 1; }
+    .day-info .day-label { font-size: 16px; font-weight: 700; }
+    .day-info .day-date { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+    .day-info .day-theme { font-size: 11px; opacity: 0.9; background: rgba(255,255,255,0.2); border-radius: 10px; padding: 3px 10px; display: inline-block; margin-top: 6px; }
+
+    .timeline { padding: 8px 18px 14px; }
+    .tl-item { display: flex; gap: 12px; position: relative; }
+    .tl-item:not(:last-child)::after { content: ''; position: absolute; left: 54px; top: 34px; bottom: 0; width: 2px; background: #edf2f7; }
+    .tl-left { width: 48px; flex-shrink: 0; text-align: right; padding-top: 12px; }
+    .tl-time { font-size: 11px; font-weight: 700; color: #a0aec0; white-space: nowrap; }
+    .tl-dot-col { width: 16px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+    .tl-dot { width: 13px; height: 13px; border-radius: 50%; background: #cbd5e0; border: 2px solid white; box-shadow: 0 0 0 2px #cbd5e0; margin-top: 14px; z-index: 1; }
+    .tl-dot.food { background: #ed8936; box-shadow: 0 0 0 2px #feebc8; }
+    .tl-dot.attraction { background: #3182ce; box-shadow: 0 0 0 2px #bee3f8; }
+    .tl-dot.move { background: #a0aec0; box-shadow: 0 0 0 2px #edf2f7; }
+    .tl-dot.key { background: #e53e3e; box-shadow: 0 0 0 2px #fed7d7; }
+    .tl-dot.rakuten { background: #bf0000; box-shadow: 0 0 0 2px #fed7d7; }
+    .tl-content { flex: 1; padding: 7px 0 14px; }
+    .tl-title { font-size: 14px; font-weight: 700; color: #2d3748; }
+    .tl-desc { font-size: 12px; color: #718096; margin-top: 3px; line-height: 1.6; }
+    .tl-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+    .tag { font-size: 11px; padding: 2px 7px; border-radius: 7px; font-weight: 600; }
+    .tag-free { background: #c6f6d5; color: #276749; }
+    .tag-price { background: #feebc8; color: #7b341e; }
+    .tag-walk { background: #e9d8fd; color: #553c9a; }
+    .tag-grab { background: #bee3f8; color: #2a4365; }
+    .tag-mrt { background: #c6f6d5; color: #1a5c38; }
+    .tag-reserve { background: #fed7d7; color: #822727; }
+    .tag-indoor { background: #e0f2f7; color: #0e7490; }
+    .tag-note { background: #fefcbf; color: #744210; }
+
+    .tip-box { margin: 4px 18px 12px; background: #fffff0; border: 1px solid #f6e05e; border-radius: 10px; padding: 10px 14px; font-size: 12px; color: #744210; line-height: 1.7; }
+    .tip-box strong { font-weight: 700; }
+
+    /* 予算 */
+    .budget-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .budget-item { background: white; border-radius: 12px; padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); text-align: center; }
+    .budget-item .b-icon { font-size: 20px; margin-bottom: 5px; }
+    .budget-item .b-label { font-size: 11px; color: #718096; margin-bottom: 5px; line-height: 1.3; }
+    .budget-item .b-price { font-size: 15px; font-weight: 800; color: #2d3748; }
+    .budget-item .b-price.free { color: #276749; }
+    .budget-total { background: linear-gradient(135deg, #1a3a5c, #2d6a9f); color: white; border-radius: 12px; padding: 20px; text-align: center; margin-top: 14px; }
+    .budget-total .bt-label { font-size: 12px; opacity: 0.7; margin-bottom: 4px; }
+    .budget-total .bt-price { font-size: 28px; font-weight: 900; }
+    .budget-total .bt-note { font-size: 11px; opacity: 0.7; margin-top: 6px; line-height: 1.5; }
+
+    /* 代替案 */
+    .alt-list { display: flex; flex-direction: column; gap: 10px; }
+    .alt-item { background: white; border-radius: 10px; padding: 12px 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); display: flex; align-items: flex-start; gap: 10px; }
+    .alt-icon { font-size: 19px; flex-shrink: 0; margin-top: 1px; }
+    .alt-text strong { font-size: 13px; font-weight: 700; display: block; }
+    .alt-text span { font-size: 12px; color: #718096; margin-top: 2px; display: block; line-height: 1.6; }
+
+    /* 実用メモ */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 10px; }
+    .info-card { background: white; border-radius: 12px; padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+    .info-card .ic-icon { font-size: 24px; margin-bottom: 6px; }
+    .info-card .ic-title { font-size: 12px; font-weight: 700; margin-bottom: 3px; color: #1a3a5c; }
+    .info-card .ic-body { font-size: 12px; color: #718096; line-height: 1.7; }
+
+    .footer { text-align: center; padding: 20px; color: #a0aec0; font-size: 11px; }
+    .lightshow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media(max-width:560px){ .lightshow-grid { grid-template-columns: 1fr; } }
+    .lightshow-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .lightshow-header { color: white; padding: 12px 16px; font-weight: 700; font-size: 13px; }
+    .lightshow-body { padding: 14px 16px; }
+    .ls-title { font-size: 12px; font-weight: 700; color: #1a3a5c; margin-bottom: 8px; }
+    .ls-row { font-size: 12px; color: #4a5568; line-height: 1.8; }
+
+    /* 参考リンク */
+    .ref-links { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0f4f8; }
+    .ref-links.no-border { border-top: none; margin-top: 5px; padding-top: 4px; }
+    .ref-link { font-size: 11px; padding: 3px 9px; border-radius: 8px; background: #edf2f7; color: #4a5568; text-decoration: none; border: 1px solid #e2e8f0; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
+    .ref-link::before { content: '🔗'; font-size: 10px; }
+    .ref-link:hover { background: #dbe8f5; color: #1a3a5c; border-color: #bee3f8; }
+    .ref-links-label { font-size: 10px; color: #a0aec0; margin-right: 2px; align-self: center; }
+  </style>
+</head>
+<body>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <span class="hero-emoji">✈️</span>
+  <h1>シンガポール旅行プラン</h1>
+  <p class="subtitle">2026年5月23日（土）〜 5月26日（火）｜ SQ671 / SQ672</p>
+  <div class="hero-meta">
+    <span>🏨 Wyndham Singapore / ベイエリア</span>
+    <span>👫 夫婦2名</span>
+    <span>💎 楽天ダイヤモンド特典</span>
+    <span>⌚ AP Café at Raffles</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- フライト情報 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">✈️</div>
+      フライト情報
+    </div>
+    <div class="flight-cards">
+      <div class="flight-card">
+        <div class="flight-card-header dep">🛫 行き（出発）</div>
+        <div class="flight-card-body">
+          <div class="flight-route">
+            <div class="flight-city">
+              <div class="code">NGO</div>
+              <div class="time">10:25</div>
+              <div class="name">名古屋（中部国際）<br>Terminal 1</div>
+            </div>
+            <div class="flight-line">
+              <div class="fl-num">SQ 671</div>
+              <div class="fl-bar"></div>
+              <div class="fl-dur">約5時間35分</div>
+            </div>
+            <div class="flight-city">
+              <div class="code">SIN</div>
+              <div class="time">16:00</div>
+              <div class="name">シンガポール（チャンギ）<br>Terminal 1</div>
+            </div>
+          </div>
+          <div class="flight-meta">
+            <span class="flight-tag">📅 5月23日（土）</span>
+            <span class="flight-tag">✈️ 787 All Series</span>
+            <span class="flight-tag">💺 エコノミー</span>
+          </div>
+        </div>
+      </div>
+      <div class="flight-card">
+        <div class="flight-card-header ret">🛬 帰り（復路）</div>
+        <div class="flight-card-body">
+          <div class="flight-route">
+            <div class="flight-city">
+              <div class="code">SIN</div>
+              <div class="time">01:20</div>
+              <div class="name">シンガポール（チャンギ）<br>Terminal 2</div>
+            </div>
+            <div class="flight-line">
+              <div class="fl-num">SQ 672</div>
+              <div class="fl-bar"></div>
+              <div class="fl-dur">約7時間40分</div>
+            </div>
+            <div class="flight-city">
+              <div class="code">NGO</div>
+              <div class="time">09:00</div>
+              <div class="name">名古屋（中部国際）<br>Terminal 1</div>
+            </div>
+          </div>
+          <div class="flight-meta">
+            <span class="flight-tag">📅 5月26日（火）深夜発</span>
+            <span class="flight-tag">✈️ 787 All Series</span>
+            <span class="flight-tag">💺 エコノミー</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-yellow" style="margin-top:12px; font-size:12px;">
+      ⚠️ <strong>帰りの重要メモ：</strong>SQ672は5月26日（火）01:20発。MRTの終電は深夜0時頃のため利用不可。
+      5月25日（月）<strong>22:00にGrabでホテルを出発</strong>（ラウンジ利用のため前倒し）→ 22:35チャンギT2着 → 出国後 <strong>SATS Premier Loungeでシャワー＆食事</strong> → 00:50ゲートへ。
+    </div>
+  </div>
+
+  <!-- ラウンジ情報 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🛋️</div>
+      ラウンジ情報（アメックスプラチナ＋プライオリティパス）
+    </div>
+
+    <div class="alert alert-blue" style="margin-bottom:16px;">
+      <strong>💳 利用資格：</strong>アメリカン・エクスプレス プラチナカード（グローバル・ラウンジ・コレクション）＋プライオリティパス、どちらでも入場可。<strong>同伴者（妻）1名まで無料。</strong>入場時は搭乗券＋カードを提示。
+    </div>
+
+    <div class="lounge-grid">
+
+      <!-- セントレア -->
+      <div class="lounge-card">
+        <div class="lounge-header dep-lounge">🛫 行き｜セントレア（NGO）SQ671 10:25発</div>
+        <div class="lounge-body">
+          <div class="lounge-name">① Plaza Premium Lounge（推奨）</div>
+          <div class="lounge-sub">Terminal 1 2F 国際線制限エリア・18ゲート付近</div>
+          <div class="lounge-row"><span class="lr-icon">🕐</span><span class="lr-label">営業時間</span><span class="lr-val">7:00〜22:00</span></div>
+          <div class="lounge-row"><span class="lr-icon">🍽️</span><span class="lr-label">食事</span><span class="lr-val">ビュッフェ（温かい料理）・アルコール含む飲み物充実</span></div>
+          <div class="lounge-row"><span class="lr-icon">🚿</span><span class="lr-label">シャワー</span><span class="lr-val">なし（セントレアのラウンジ全般的にシャワーなし）</span></div>
+          <div class="lounge-row"><span class="lr-icon">📶</span><span class="lr-label">設備</span><span class="lr-val">Wi-Fi・電源・パソコン作業用テーブル</span></div>
+          <div class="lounge-tags">
+            <span class="ltag ltag-ok">✅ プライオリティパス</span>
+            <span class="ltag ltag-ok">✅ アメックスプラチナ</span>
+            <span class="ltag ltag-no">🚿 シャワーなし</span>
+          </div>
+
+          <div style="margin-top:12px; padding-top:12px; border-top:1px solid #f0f4f8;">
+            <div class="lounge-name" style="font-size:13px;">② Coral Lounge（代替・新施設）</div>
+            <div class="lounge-sub">Terminal 1 2F 国際線制限エリア</div>
+            <div class="lounge-row"><span class="lr-icon">🕐</span><span class="lr-label">営業時間</span><span class="lr-val">7:00〜22:00（2025年4月オープン）</span></div>
+            <div class="lounge-row"><span class="lr-icon">💆</span><span class="lr-label">特徴</span><span class="lr-val">タイ式マッサージ15分無料・新しく清潔・空いている</span></div>
+            <div class="lounge-tags">
+              <span class="ltag ltag-ok">✅ プライオリティパス</span>
+              <span class="ltag ltag-tip">💆 マッサージ15分無料</span>
+            </div>
+          </div>
+
+          <div class="lounge-timeline">
+            <div class="lt-title">📋 推奨タイムライン（10:25発）</div>
+            <div class="lt-row"><span class="lt-time">8:00</span><span class="lt-desc">セントレア到着・チェックイン・保安検査・出国審査</span></div>
+            <div class="lt-row"><span class="lt-time">8:30</span><span class="lt-desc">ラウンジ入場（朝の時間帯は比較的空いている）</span></div>
+            <div class="lt-row"><span class="lt-time">9:45</span><span class="lt-desc">ラウンジ出て搭乗口へ移動</span></div>
+            <div class="lt-row"><span class="lt-time">10:25</span><span class="lt-desc">✈️ SQ671 出発</span></div>
+          </div>
+          <div class="ref-links">
+            <span class="ref-links-label">参考：</span>
+            <a href="https://www.centrair.jp/info/premiumlounge_centrair.html" target="_blank" class="ref-link">セントレア公式ラウンジ案内</a>
+            <a href="https://www.prioritypass.com/en/airport-guides/nagoya-central-japan" target="_blank" class="ref-link">Priority Pass / セントレア</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- チャンギ -->
+      <div class="lounge-card">
+        <div class="lounge-header ret-lounge">🛬 帰り｜チャンギ空港 T2（SIN）SQ672 01:20発</div>
+        <div class="lounge-body">
+          <div class="lounge-name">SATS Premier Lounge（強く推奨）</div>
+          <div class="lounge-sub">Terminal 2・Departure Transit Hall Level 3（出国審査後）</div>
+          <div class="lounge-row"><span class="lr-icon">🕐</span><span class="lr-label">営業時間</span><span class="lr-val"><strong>24時間営業</strong> ✅ 深夜01:20便でも問題なし</span></div>
+          <div class="lounge-row"><span class="lr-icon">🚿</span><span class="lr-label">シャワー</span><span class="lr-val"><strong>あり（3室）</strong> タオル受付で取得。深夜帯は空きやすい。</span></div>
+          <div class="lounge-row"><span class="lr-icon">🍽️</span><span class="lr-label">食事</span><span class="lr-val">プレミアムビュッフェ・アルコール無料</span></div>
+          <div class="lounge-row"><span class="lr-icon">💆</span><span class="lr-label">設備</span><span class="lr-val">OSIMマッサージチェア（10分無料）・USB-C電源</span></div>
+          <div class="lounge-row"><span class="lr-icon">👫</span><span class="lr-label">同伴者</span><span class="lr-val">アメックスプラチナで妻1名まで<strong>無料</strong></span></div>
+          <div class="lounge-row"><span class="lr-icon">⏱️</span><span class="lr-label">滞在制限</span><span class="lr-val">なし（Ambassador Loungeは3時間制限）</span></div>
+          <div class="lounge-tags">
+            <span class="ltag ltag-ok">✅ プライオリティパス</span>
+            <span class="ltag ltag-ok">✅ アメックスプラチナ</span>
+            <span class="ltag ltag-shower">🚿 シャワー3室あり</span>
+            <span class="ltag ltag-ok">✅ 24時間営業</span>
+            <span class="ltag ltag-tip">👫 妻も無料</span>
+          </div>
+
+          <div class="lounge-timeline">
+            <div class="lt-title">📋 推奨タイムライン（01:20発）← Day3更新済み</div>
+            <div class="lt-row"><span class="lt-time">22:00</span><span class="lt-desc">ホテル出発（Grab）← 21:00→22:00に前倒し</span></div>
+            <div class="lt-row"><span class="lt-time">22:35</span><span class="lt-desc">チャンギ空港 T2 到着</span></div>
+            <div class="lt-row"><span class="lt-time">22:35〜23:15</span><span class="lt-desc">SQ672チェックイン・預け荷物・保安検査・出国審査</span></div>
+            <div class="lt-row"><span class="lt-time">23:15</span><span class="lt-desc">🛋️ SATS Premier Lounge 入場</span></div>
+            <div class="lt-row"><span class="lt-time">23:15〜24:00</span><span class="lt-desc">シャワー（2名順番に）・食事・アルコール・マッサージチェア</span></div>
+            <div class="lt-row"><span class="lt-time">00:50</span><span class="lt-desc">ラウンジを出て搭乗ゲートへ</span></div>
+            <div class="lt-row"><span class="lt-time">01:20</span><span class="lt-desc">✈️ SQ672 出発 → 名古屋09:00着</span></div>
+          </div>
+          <div class="ref-links">
+            <span class="ref-links-label">参考：</span>
+            <a href="https://www.prioritypass.com/lounges/singapore/singapore-changi/sin13-sats-premier-lounge" target="_blank" class="ref-link">SATS Premier Lounge（PP公式）</a>
+            <a href="https://www.prioritypass.com/en-GB/airport-guides/singapore-changi/terminal-2" target="_blank" class="ref-link">チャンギT2 ラウンジ一覧</a>
+            <a href="https://www.changiairport.com/en/airport-guide/facilities-and-services/lounges.html" target="_blank" class="ref-link">チャンギ空港公式</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-yellow" style="margin-top:12px; font-size:12px;">
+      ⚠️ <strong>セントレアはシャワーなし</strong>のため、帰国後に名古屋駅等のシャワー施設を利用するか、フライト中に機内で対応。シンガポール出発前にSATS Premier Loungeのシャワーをしっかり利用しておくのがベスト。
+    </div>
+  </div>
+
+  <!-- 地図 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🗺️</div>
+      主要スポット マップ
+    </div>
+    <div id="map"></div>
+    <div class="map-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>🏨 ホテル（拠点）</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#dc2626"></div>🎭 観光・アトラクション</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#16a34a"></div>🍽️ レストラン（確定）</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div>✈️ 空港 / ✨ ライトショー</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#d97706"></div>🌳 Gardens / AP Café</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#0e7490"></div>🔵 屋台・検討中グルメ</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b45309"></div>⭐ バクテイ（妻リクエスト）</div>
+    </div>
+  </div>
+
+  <!-- 移動手段ガイド -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🚌</div>
+      移動手段ガイド：Grab vs MRT vs 徒歩
+    </div>
+
+    <div class="alert alert-blue" style="margin-bottom:16px;">
+      <strong>💡 結論：ハイブリッド作戦がベスト</strong><br>
+      ベイエリア内は徒歩も快適（夕方・朝なら）。オーチャード方面はMRTが断然早くて安い。空港送迎はGrab一択。Grabを「タクシー」、MRTを「電車」感覚で組み合わせれば理想的。
+    </div>
+
+    <div class="transport-tabs">
+      <div class="transport-tab active" onclick="showTab('recommend')">✅ おすすめ組み合わせ</div>
+      <div class="transport-tab" onclick="showTab('table')">📊 区間別比較表</div>
+      <div class="transport-tab" onclick="showTab('mrt')">🚇 MRT乗り方ガイド</div>
+    </div>
+
+    <!-- おすすめ組み合わせ -->
+    <div class="transport-panel active" id="panel-recommend">
+      <div class="recommended-routes">
+        <div class="rec-route">
+          <div class="rec-route-icon">🛬</div>
+          <div class="rec-route-body">
+            <div class="rec-route-title">Day1｜チャンギ空港 → ホテル（City Hall）</div>
+            <div class="rec-route-detail">
+              <strong>おすすめ：MRT（East West Line）</strong><br>
+              チャンギ → Tanah Merah で乗り換え → City Hall まで約32分。同一ホームで乗り換えOKで簡単。スーツケースも問題なし。夜16時台はそれほど混雑しない。<br>
+              帰りの夜便はMRT終電前に乗れないので<strong>Grab一択</strong>。
+            </div>
+            <div class="route-tags">
+              <span class="rtag rtag-mrt">🚇 MRT S$1.5〜2.2 / 32分</span>
+              <span class="rtag rtag-grab">🚗 Grab S$31〜43（空港税込）/ 35分</span>
+              <span class="rtag rtag-price">MRTで約S$30節約</span>
+            </div>
+          </div>
+        </div>
+        <div class="rec-route">
+          <div class="rec-route-icon">🏖️</div>
+          <div class="rec-route-body">
+            <div class="rec-route-title">Day2｜ホテル（City Hall）→ MBS（Bayfront）</div>
+            <div class="rec-route-detail">
+              <strong>おすすめ：Grab（S$4〜6）</strong><br>
+              MRTでも行けるが乗り換えがあり却って面倒。Grabなら5分でドア to ドア。朝イチはGrabで移動し、帰りは夜のベイ沿い散歩もあり。<br>
+              ※体力に余裕があれば <strong>徒歩（Helix Bridge経由）</strong> も絶景でおすすめ（15〜20分）。
+            </div>
+            <div class="route-tags">
+              <span class="rtag rtag-grab">🚗 Grab S$4〜6 / 5分</span>
+              <span class="rtag rtag-walk">🚶 徒歩 15〜20分（ウォーターフロント景色◎）</span>
+            </div>
+          </div>
+        </div>
+        <div class="rec-route">
+          <div class="rec-route-icon">⌚</div>
+          <div class="rec-route-body">
+            <div class="rec-route-title">Day2｜ホテル → Raffles Hotel（AP Café）</div>
+            <div class="rec-route-detail">
+              <strong>おすすめ：徒歩（5分）</strong><br>
+              ホテルのすぐそば。歩いて行けるので交通費不要。
+            </div>
+            <div class="route-tags">
+              <span class="rtag rtag-walk">🚶 徒歩 約5分（無料）</span>
+            </div>
+          </div>
+        </div>
+        <div class="rec-route">
+          <div class="rec-route-icon">🍗</div>
+          <div class="rec-route-body">
+            <div class="rec-route-title">Day3｜ホテル → CHATTERBOX（オーチャード）</div>
+            <div class="rec-route-detail">
+              <strong>おすすめ：MRT（North-South Line）</strong><br>
+              City Hall → Orchard まで3駅・約7分・S$1程度。直通で乗り換えなし。安くて速い。帰りもMRTで十分。夕方以降は混雑するので早めに。
+            </div>
+            <div class="route-tags">
+              <span class="rtag rtag-mrt">🚇 MRT NS線直通 S$1 / 7分</span>
+              <span class="rtag rtag-grab">🚗 Grab S$7〜10 / 15分</span>
+              <span class="rtag rtag-price">MRT推奨（速くて安い）</span>
+            </div>
+          </div>
+        </div>
+        <div class="rec-route">
+          <div class="rec-route-icon">🛫</div>
+          <div class="rec-route-body">
+            <div class="rec-route-title">Day3（深夜）｜ホテル → チャンギ空港</div>
+            <div class="rec-route-detail">
+              <strong>おすすめ：Grab一択</strong><br>
+              深夜01:20発のフライト。MRTは深夜0時頃に終電のため使えない。21:00にGrabを配車し21:35頃空港着が安全。スーツケースがあるのでGrabが正解。
+            </div>
+            <div class="route-tags">
+              <span class="rtag rtag-grab">🚗 Grab S$35〜55 / 35分</span>
+              <span class="rtag" style="background:#fed7d7;color:#822727;">⚠️ MRT終電で行けない</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区間別比較表 -->
+    <div class="transport-panel" id="panel-table">
+      <div class="route-table">
+        <div class="route-row route-header">
+          <div class="route-cell">区間</div>
+          <div class="route-cell">MRT</div>
+          <div class="route-cell">Grab</div>
+          <div class="route-cell">おすすめ</div>
+        </div>
+        <div class="route-row">
+          <div class="route-cell">✈️ 空港 → ホテル</div>
+          <div class="route-cell">S$1.5〜2.2<br>約32分</div>
+          <div class="route-cell">S$31〜43<br>約35分</div>
+          <div class="route-cell rec">🚇 MRT<br>（行きのみ）</div>
+        </div>
+        <div class="route-row">
+          <div class="route-cell">🏨 ホテル → MBS</div>
+          <div class="route-cell">S$1〜2<br>乗り換えあり</div>
+          <div class="route-cell">S$4〜6<br>約5分</div>
+          <div class="route-cell rec">🚗 Grab<br>or 徒歩</div>
+        </div>
+        <div class="route-row">
+          <div class="route-cell">⌚ ホテル → Raffles</div>
+          <div class="route-cell">不要</div>
+          <div class="route-cell">不要</div>
+          <div class="route-cell rec">🚶 徒歩5分</div>
+        </div>
+        <div class="route-row">
+          <div class="route-cell">🦀 MBS → Palm Beach</div>
+          <div class="route-cell">不要</div>
+          <div class="route-cell">S$4〜6</div>
+          <div class="route-cell rec">🚶 徒歩10〜15分</div>
+        </div>
+        <div class="route-row">
+          <div class="route-cell">🍗 ホテル → Orchard</div>
+          <div class="route-cell">S$1<br>約7分・直通</div>
+          <div class="route-cell">S$7〜10<br>約15分</div>
+          <div class="route-cell rec">🚇 MRT NS線<br>（圧倒的に速い）</div>
+        </div>
+        <div class="route-row">
+          <div class="route-cell">✈️ ホテル → 空港（深夜）</div>
+          <div class="route-cell warn">❌ 終電で不可</div>
+          <div class="route-cell">S$35〜55<br>約35分</div>
+          <div class="route-cell rec">🚗 Grab一択</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MRT乗り方ガイド -->
+    <div class="transport-panel" id="panel-mrt">
+      <div class="transport-tip">
+        <h4>🚇 シンガポールMRT 乗り方ガイド（日本人向け）</h4>
+
+        <div class="tip-row">
+          <div class="tip-label">💳 一番簡単な乗り方</div>
+          <div class="tip-body">
+            <strong>クレジットカードのタッチ決済（SimplyGo）でそのまま乗車可能</strong><br>
+            Visa・Mastercard・AmexのタッチカードをICリーダーにかざすだけ。EZ-Linkカード不要。日本のカードでOK。
+            ただし1日あたりS$0.60の手数料あり（3日間でS$1.8程度）。
+          </div>
+        </div>
+        <div class="tip-row">
+          <div class="tip-label">🎫 EZ-Linkカード</div>
+          <div class="tip-body">
+            チャンギ空港内の7-Eleven・Cheers・TransitLinkで購入。<br>
+            <strong>S$10（カード代S$5 ＋ チャージS$5）</strong>。バスにも使える。Suica感覚で使えるので複数日使うなら買っておくのも◎。
+          </div>
+        </div>
+        <div class="tip-row">
+          <div class="tip-label">📍 主要路線</div>
+          <div class="tip-body">
+            <span class="mrt-badge mrt-ns">NS</span>North-South Line（赤）…City Hall〜Orchard直通<br>
+            <span class="mrt-badge mrt-ew">EW</span>East-West Line（緑）…City Hall〜チャンギ空港<br>
+            <span class="mrt-badge mrt-cc">CC</span>Circle Line（黄）…Bayfront（MBS）へ<br>
+            <span class="mrt-badge mrt-te">TE</span>Thomson-East Coast Line（茶）…新線・便利
+          </div>
+        </div>
+        <div class="tip-row">
+          <div class="tip-label">⏰ 終電・始発</div>
+          <div class="tip-body">
+            終電：<strong>深夜0時〜0時30分頃</strong>（路線・駅による）<br>
+            始発：朝5時30分頃<br>
+            ⚠️ 帰りのフライト（深夜01:20）はMRTに間に合わないためGrab必須
+          </div>
+        </div>
+        <div class="tip-row">
+          <div class="tip-label">💡 乗り方Tips</div>
+          <div class="tip-body">
+            ・ドアの両脇に並ぶ（日本と同じ感覚）<br>
+            ・エアコン完備で快適<br>
+            ・Google Mapsで経路検索が使いやすい（MRT対応済み）<br>
+            ・平日ラッシュ（8〜9時・18〜19時）は混雑
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 調査で判明した修正ポイント -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🔍</div>
+      調査で判明した重要ポイント
+    </div>
+    <div class="alert alert-red"><strong>⌚ AP Café は閉店20:00 → 16:00台の訪問を設定</strong><br>営業11:00〜20:00。座席数が屋内約12席と少ないため事前予約が必須。16:00〜17:30でAP Caféを楽しみ、その後徒歩10分でPALM BEACHへ。</div>
+    <div class="alert alert-green"><strong>⛵ Sampan Ride は楽天特典で無料！外部予約不要</strong><br>Sands LifeStyleカウンターでエリートアップグレード時に時間枠を予約する。外部サイトでの事前購入は不要。</div>
+    <div class="alert alert-yellow"><strong>⚠️ 楽天チケット「1日2枚まで」の可能性 → Day2/Day3に分散</strong><br>Day2：ArtScience Museum＋Sampan Ride（各2枚）。Day3：Skypark（2枚）に分けて利用が安全。カウンターで利用ルールを確認すること。</div>
+  </div>
+
+  <!-- 楽天ダイヤモンド特典ガイド -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">💎</div>
+      楽天ダイヤモンド × MBS 特典ガイド
+    </div>
+    <div class="rakuten-guide">
+      <div class="rakuten-header">💎 楽天ダイヤモンド → Sands LifeStyle「エリート」3ヶ月無料アップグレード（〜2027年2月有効）</div>
+      <div class="rakuten-body">
+        <div style="margin-bottom:14px;">
+          <div style="font-size:13px;font-weight:700;margin-bottom:8px;">無料になるアトラクション（月6枚）</div>
+          <div class="benefit-grid">
+            <div class="benefit-item"><div class="b-icon">🌅</div><div class="b-label">Skypark 展望デッキ</div><div class="b-val">無料</div></div>
+            <div class="benefit-item"><div class="b-icon">⛵</div><div class="b-label">Sampan Ride</div><div class="b-val">無料</div></div>
+            <div class="benefit-item"><div class="b-icon">🎨</div><div class="b-label">ArtScience Museum</div><div class="b-val">月2枚</div></div>
+          </div>
+          <div style="font-size:11px;color:#718096;margin-top:8px;">※Digital Light Canvasは特典対象外の可能性あり（別途S$5/人）</div>
+        </div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px;border-top:1px solid #edf2f7;padding-top:12px;">手続き手順（現地）</div>
+        <div class="rakuten-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Sands LifeStyleカウンターへ直行</strong>
+            <span>場所：MBS Tower 1 ロビー（ホテル入口付近）｜ 営業：10:00〜22:30<br>所要：5〜15分。MBS到着後まず最初に向かう。</span>
+          </div>
+        </div>
+        <div class="rakuten-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>必要なものを提示して手続き</strong>
+            <span>①パスポート ②楽天ダイヤモンドのスクリーンショット（楽天PointClubアプリ）<br>スタッフは英語対応のみ。以下のフレーズをそのまま使う：</span>
+            <div class="english-phrase">"I'm a Rakuten Diamond member.<br>I'd like to upgrade to Elite membership."<br><span style="color:#63b3ed;">（楽天ダイヤモンド会員です。エリート会員にアップグレードしたいです）</span></div>
+          </div>
+        </div>
+        <div class="rakuten-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>アップグレード完了 → Sampan Rideの時間を予約</strong>
+            <span>無料チケット取得後、その場でSampan Rideの希望時間帯を伝えて予約。<br>利用上限（1日2枚制限の有無）もここで確認する。</span>
+          </div>
+        </div>
+        <ul class="caution-list">
+          <li>1日2枚（＝2人で1アトラクション）の利用制限報告あり → Day2とDay3に分けて使うと安心</li>
+          <li>Wi-Fi不安定対策：楽天アプリのランク画面を<strong>出発前にスクリーンショット保存</strong>（必須）</li>
+          <li>MBSへの宿泊は不要。ウィンダム宿泊でも特典を受けられる</li>
+          <li>カウンターは英語のみ。日本語スタッフはいないと想定しておく</li>
+        </ul>
+        <div class="ref-links" style="margin-top:14px;">
+          <span class="ref-links-label">参考：</span>
+          <a href="https://www.marinabaysands.com/sands-lifestyle/sands-alliance-partners/rakuten.html" target="_blank" class="ref-link">MBS × 楽天 公式</a>
+          <a href="https://www.marinabaysands.com/" target="_blank" class="ref-link">Marina Bay Sands 公式</a>
+          <a href="https://corp.rakuten.co.jp/news/press/2024/0528_01.html" target="_blank" class="ref-link">楽天プレスリリース</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AP Café詳細 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">⌚</div>
+      AP Café（オーデマピゲ カフェ）詳細
+    </div>
+    <div class="ap-info">
+      <div class="ap-header">⌚ AP Café Singapore — 世界初のAP Café at Raffles Hotel（2025年1月オープン）</div>
+      <div class="ap-body">
+        <div class="alert alert-blue" style="margin-bottom:12px;font-size:12px;"><strong>誰でも入店可。</strong>時計購入不要でカフェ利用OK。ミシュラン1つ星「Burnt Ends」がメニュー監修。スマートカジュアル推奨。</div>
+        <div class="ap-grid">
+          <div class="ap-cell"><div class="ac-label">場所</div><div class="ac-val">Raffles Hotel内<br>Bar &amp; Billiard Room</div></div>
+          <div class="ap-cell"><div class="ac-label">営業時間</div><div class="ac-val">11:00〜20:00（毎日）<br>⚠️ 閉店20時に注意</div></div>
+          <div class="ap-cell"><div class="ac-label">座席数</div><div class="ac-val">屋内 約12席<br>屋外テラスあり</div></div>
+          <div class="ap-cell"><div class="ac-label">予約方法</div><div class="ac-val">📞 +65 3129 2087<br>✉️ apcafe.singapore@<br>audemarspiguet.com</div></div>
+        </div>
+        <div style="font-size:13px;font-weight:700;margin:14px 0 8px;">おすすめメニュー（抜粋）</div>
+        <div class="menu-item"><span>🧀 ゴールデン ロエスティ（キャビア&クレームフレーシュ）</span><span class="menu-price">S$25</span></div>
+        <div class="menu-item"><span>🥩 ショートリブ ラクレット パイ</span><span class="menu-price">S$38</span></div>
+        <div class="menu-item"><span>🍰 スイスロール（ハニカム&ハニーアイスクリーム）</span><span class="menu-price">S$18</span></div>
+        <div class="menu-item"><span>🍸 カクテル（5種）</span><span class="menu-price">S$26〜</span></div>
+        <div class="menu-item"><span>☕ コーヒー（Burnt Ends焙煎）</span><span class="menu-price">〜S$12</span></div>
+        <div style="font-size:12px;color:#718096;margin-top:10px;">2名でドリンク＋フード2〜3品：目安S$80〜120。アフタヌーンティー感覚の訪問に最適。</div>
+        <div class="ref-links" style="margin-top:12px;">
+          <span class="ref-links-label">参考：</span>
+          <a href="https://www.audemarspiguet.com/com/en/stores/ap-house-singapore.html" target="_blank" class="ref-link">AP House Singapore 公式</a>
+          <a href="https://www.rafflesarcade.com.sg/arcade/ap-caf%C3%A9-singapore" target="_blank" class="ref-link">Raffles Arcade 紹介</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 出発前チェックリスト -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">📋</div>
+      出発前にやること
+    </div>
+    <div class="checklist">
+      <div class="check-item urgent" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>AP Café を予約する（16:00台の枠で）</strong>
+          <span>Day2 16:00〜希望。メール: apcafe.singapore@audemarspiguet.com または📞 +65 3129 2087。閉店20:00のため16:00台確保が必須。</span>
+        </div>
+        <span class="badge-urgent">最優先</span>
+      </div>
+      <div class="check-item urgent" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>PALM BEACH Seafood を予約する</strong>
+          <span>Day2 18:30〜。AP Caféの後、マーライオン公園の隣でチリクラブ。MBSの夜景を眺めながら。<br>
+          📞 公式予約: <a href="https://www.palmbeachseafood.com/" target="_blank" style="color:#3182ce;">palmbeachseafood.com</a>　参考: <a href="https://s.tabelog.com/singapore/A5502/A550201/55000005/" target="_blank" style="color:#3182ce;">食べログ（口コミ）</a></span>
+        </div>
+        <span class="badge-urgent">最優先</span>
+      </div>
+      <div class="check-item urgent" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>CHATTERBOX を予約する</strong>
+          <span>Day3 ランチ 12:30〜。Hilton Singapore Orchard（MRT City Hall→Orchard 7分）。<br>
+          📞 公式: <a href="https://www.hiltonsingaporeorchard.com/restaurants/chatterbox/" target="_blank" style="color:#3182ce;">Hilton公式ページ</a>　参考: <a href="https://s.tabelog.com/singapore/A5504/A550401/55000013/" target="_blank" style="color:#3182ce;">食べログ（口コミ）</a></span>
+        </div>
+        <span class="badge-urgent">最優先</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>楽天PointClubアプリでダイヤモンドランク画面をスクショ保存</strong>
+          <span>Sands LifeStyleカウンターで必須提示。複数枚保存してオフラインでも見られる状態に。</span>
+        </div>
+        <span class="badge-urgent">必須</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>Marina Bay Sands アプリをインストール・登録</strong>
+          <span>事前登録でSands LifeStyleカウンターの手続きがスムーズに。</span>
+        </div>
+        <span class="badge-normal">必須</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>Grab アプリをインストール・日本のカードを登録</strong>
+          <span>出発前に登録しておくとチャンギ空港到着後すぐ使える。</span>
+        </div>
+        <span class="badge-normal">必須</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>英語フレーズを確認</strong>
+          <span>"I'm a Rakuten Diamond member. I'd like to upgrade to Elite membership."</span>
+        </div>
+        <span class="badge-info">推奨</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>SGD現金を少し用意（S$20〜30）</strong>
+          <span>ホーカー（屋台）はカード不可の場合あり。チップは不要。</span>
+        </div>
+        <span class="badge-info">推奨</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 日程プラン -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">📅</div>
+      現地行動プラン
+    </div>
+
+    <!-- Day 1 -->
+    <div class="day-card">
+      <div class="day-header day1">
+        <div class="day-number">1</div>
+        <div class="day-info">
+          <div class="day-label">Day 1 ｜ 5月23日（土）</div>
+          <div class="day-date">SQ671 NGO 10:25 → SIN 16:00着</div>
+          <div class="day-theme">🛋️ ラウンジ＆到着日 ― ゆったりスタート</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">8:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🚗 セントレア到着・チェックイン</div>
+            <div class="tl-desc">国際線チェックイン → 保安検査 → 出国審査。早めに済ませてラウンジへ。</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">8:30</div></div>
+          <div class="tl-dot-col"><div class="tl-dot key"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🛋️ ラウンジ利用｜Plaza Premium Lounge（推奨）</div>
+            <div class="tl-desc">Terminal 1 2F 国際線制限エリア。アメックスプラチナ＋プライオリティパスで入場。朝食ビュッフェ・アルコール・Wi-Fi。シャワーはないが、出発前にゆったり過ごせる。</div>
+            <div class="tl-tags">
+              <span class="tag tag-free">アメックス/PPで無料</span>
+              <span class="tag tag-note">または Coral Lounge（マッサージ15分無料）</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">9:45</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🚶 搭乗ゲートへ移動</div>
+            <div class="tl-desc">余裕を持って搭乗口へ。</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">10:25</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">✈️ SQ671 出発</div>
+            <div class="tl-desc">Terminal 1発。約5時間35分のフライト。</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">16:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🛬 チャンギ空港 Terminal 1 着</div>
+            <div class="tl-desc">入国審査・荷物受取後、空港内でSIMカード購入 → MRT（EW線）でCity Hallへ</div>
+            <div class="tl-tags">
+              <span class="tag tag-mrt">🚇 MRT EW線 → Tanah Merah乗換 → City Hall / 約32分 / S$1.5〜2</span>
+              <span class="tag tag-price">SIM購入 ～S$12</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">17:15</div></div>
+          <div class="tl-dot-col"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🏨 Wyndham Hotel チェックイン</div>
+            <div class="tl-desc">City Hall駅から徒歩3〜5分。荷物を置いてリフレッシュ。翌日のために体力温存。</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">19:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot food"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🍜 夕食｜Lau Pa Sat（ラウパサ）</div>
+            <div class="tl-desc">ホテル近くのホーカーセンター。チキンライス・サテーなど屋台料理を気軽に。正装不要・近い。</div>
+            <div class="tl-tags"><span class="tag tag-grab">Grab or 徒歩15分</span><span class="tag tag-price">S$10〜20/人</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-card">
+      <div class="day-header day2">
+        <div class="day-number">2</div>
+        <div class="day-info">
+          <div class="day-label">Day 2 ｜ 5月24日（日）</div>
+          <div class="day-date">終日フリー</div>
+          <div class="day-theme">🌟 MBS制覇 + AP Café + チリクラブ</div>
+        </div>
+      </div>
+      <div class="tip-box">
+        <strong>🗺️ Day2の動線：</strong>ホテル →（Grab5分）→ MBS（楽天手続き＋ArtScience＋Sampan）→（徒歩15分）→ Raffles（AP Café）→（徒歩10分）→ マーライオン公園 →（徒歩2分）→ PALM BEACH（夕食）→（Grab）→ ホテル。すべて徒歩でつながる理想的な動線。
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">10:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot rakuten"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">💎 MBS Sands LifeStyleカウンターへ（最初に！）</div>
+            <div class="tl-desc">Tower 1ロビーのカウンターへ直行。楽天ダイヤモンド証明（スクショ）＋パスポートを提示しエリートにアップグレード。Sampan Rideの時間枠（13:30目安）もここで予約。所要5〜15分。</div>
+            <div class="tl-tags"><span class="tag tag-free">無料化の要</span><span class="tag tag-note">英語："I'm a Rakuten Diamond member"</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">10:30</div></div>
+          <div class="tl-dot-col"><div class="tl-dot attraction"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🎨 ArtScience Museum</div>
+            <div class="tl-desc">蓮の花型の建物。デジタルアート体験。日中の暑い時間帯に屋内で快適に過ごせる。</div>
+            <div class="tl-tags"><span class="tag tag-free">楽天特典で無料（2枚使用）</span><span class="tag tag-indoor">屋内・冷房完備</span><span class="tag tag-walk">所要1.5時間</span></div>
+            <div class="ref-links no-border">
+              <a href="https://www.marinabaysands.com/museum.html" target="_blank" class="ref-link">ArtScience Museum 公式</a>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">12:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot food"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🍽️ ランチ｜The Shoppes 内で</div>
+            <div class="tl-desc">MBS内60以上の飲食店。屋内で休みながら。夕方にAP Caféがあるので軽めに。</div>
+            <div class="tl-tags"><span class="tag tag-indoor">屋内・冷房</span><span class="tag tag-price">S$15〜30/人</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">13:30</div></div>
+          <div class="tl-dot-col"><div class="tl-dot attraction"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">⛵ Sampan Ride（予約済み時間）</div>
+            <div class="tl-desc">The Shoppes地下B2の運河でゴンドラ乗船体験。</div>
+            <div class="tl-tags"><span class="tag tag-free">楽天特典で無料（2枚使用）</span><span class="tag tag-walk">所要30分</span></div>
+            <div class="ref-links no-border">
+              <a href="https://www.marinabaysands.com/attractions/sampan-rides.html" target="_blank" class="ref-link">Sampan Rides 公式</a>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">14:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🛍️ The Shoppes でひと休み・ショッピング</div>
+            <div class="tl-desc">ルイ・ヴィトン等高級ブランドが並ぶモール。夕方に向けて体力温存。カフェで一服も◎。</div>
+            <div class="tl-tags"><span class="tag tag-indoor">屋内・冷房</span><span class="tag tag-walk">〜1.5時間</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">15:30</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🚶 Raffles Hotel へ移動</div>
+            <div class="tl-desc">ベイ沿いのウォーターフロントを歩いて15〜20分（景色◎）。暑ければGrabでも（S$4〜6）。</div>
+            <div class="tl-tags"><span class="tag tag-walk">徒歩15〜20分（景観ルート）</span><span class="tag tag-grab">or Grab S$4〜6</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">16:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot key"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">⌚ AP Café at Raffles Hotel</div>
+            <div class="tl-desc">世界初のAP Café。Bar &amp; Billiard Roomの美しいインテリアでカクテル＋軽食を。夕食前のアフタヌーンタイム。閉店20:00のため16:00〜17:30で楽しむ。</div>
+            <div class="tl-tags"><span class="tag tag-reserve">事前予約済</span><span class="tag tag-price">S$80〜120（2名）</span><span class="tag tag-note">スマートカジュアル推奨</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">17:45</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🦁 マーライオン公園（立ち寄り）</div>
+            <div class="tl-desc">AP Caféから徒歩10分。夕暮れのマーライオンと記念撮影。PALM BEACHへの動線上にある。</div>
+            <div class="tl-tags"><span class="tag tag-free">無料</span><span class="tag tag-walk">10〜15分</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">18:30</div></div>
+          <div class="tl-dot-col"><div class="tl-dot food"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🦀 夕食｜PALM BEACH Seafood（チリクラブ）</div>
+            <div class="tl-desc">One Fullerton（マーライオン公園のすぐ隣）。MBSの夜景を正面に眺めながらチリクラブ。AP Caféが軽食なのでここで本格ディナー。</div>
+            <div class="tl-tags"><span class="tag tag-reserve">予約済（18:30〜）</span><span class="tag tag-price">S$150〜170（2名）</span><span class="tag tag-walk">所要2時間</span></div>
+            <div class="ref-links no-border">
+              <a href="https://www.palmbeachseafood.com/" target="_blank" class="ref-link">PALM BEACH 公式</a>
+              <a href="https://s.tabelog.com/singapore/A5502/A550201/55000005/" target="_blank" class="ref-link">食べログ（口コミ）</a>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">20:30</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🏨 ホテルへ帰着</div>
+            <div class="tl-desc">徒歩15分 or Grab。充実のDay2終了！</div>
+            <div class="tl-tags"><span class="tag tag-walk">徒歩15分</span><span class="tag tag-grab">or Grab S$4〜6</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-card">
+      <div class="day-header day3">
+        <div class="day-number">3</div>
+        <div class="day-info">
+          <div class="day-label">Day 3 ｜ 5月25日（月）〜 26日（火）</div>
+          <div class="day-date">SQ672 SIN 01:20発（5/26）→ NGO 09:00着</div>
+          <div class="day-theme">🌅 Skypark + チキンライス + ゆったり帰路</div>
+        </div>
+      </div>
+      <div class="tip-box">
+        <strong>🛋️ Day3のポイント：</strong>チェックアウト後も荷物はホテルに預けられます。帰りは<strong>22:00ホテル出発→チャンギ22:35着→出国後SATS Premier Loungeでシャワー＋食事（約1時間）→01:20出発</strong>の余裕あるプラン。MRTは深夜0時終電のためGrab一択。
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">〜11:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🏨 チェックアウト・荷物を預ける</div>
+            <div class="tl-desc">ホテルにスーツケースを預けて身軽に行動。夜の出発前に受け取ればOK。</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">11:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot attraction"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🌅 Skypark Observation Deck（展望デッキ）</div>
+            <div class="tl-desc">MBS56階から360°パノラマ。午前中は空いていて快適。Day2とチケットを分けて利用（楽天特典Day3分）。</div>
+            <div class="tl-tags"><span class="tag tag-free">楽天特典で無料（Day3に利用）</span><span class="tag tag-walk">所要45分</span><span class="tag tag-grab">Grab S$4〜6</span></div>
+            <div class="ref-links no-border">
+              <a href="https://www.marinabaysands.com/attractions/skypark-observation-deck.html" target="_blank" class="ref-link">Skypark 公式</a>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">12:15</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🚇 MRTでオーチャードへ移動</div>
+            <div class="tl-desc">City Hall駅（ホテル近く）→ Orchard駅。North-South Line直通・3駅・7分・S$1。</div>
+            <div class="tl-tags"><span class="tag tag-mrt">🚇 MRT NS線 直通 S$1 / 7分</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">12:30</div></div>
+          <div class="tl-dot-col"><div class="tl-dot food"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🍗 ランチ｜CHATTERBOX（チャターボックス）</div>
+            <div class="tl-desc">Hilton Singapore Orchard内。シンガポール最高峰のチキンライス＆ラクサ。最終日にふさわしい贅沢なランチ。</div>
+            <div class="tl-tags"><span class="tag tag-reserve">予約済</span><span class="tag tag-price">S$60〜80（2名）</span><span class="tag tag-walk">所要1.5〜2時間</span></div>
+            <div class="ref-links no-border">
+              <a href="https://www.hiltonsingaporeorchard.com/restaurants/chatterbox/" target="_blank" class="ref-link">CHATTERBOX 公式</a>
+              <a href="https://s.tabelog.com/singapore/A5504/A550401/55000013/" target="_blank" class="ref-link">食べログ（口コミ）</a>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">14:30</div></div>
+          <div class="tl-dot-col"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🛍️ オーチャードロード散策（任意）</div>
+            <div class="tl-desc">ION Orchardなどでお土産・ショッピング。疲れていればMRTで直帰もOK。</div>
+            <div class="tl-tags"><span class="tag tag-indoor">屋内冷房</span><span class="tag tag-walk">任意・〜2時間</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">17:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🏨 ホテルへ戻る・荷物受取・休憩</div>
+            <div class="tl-desc">MRT or Grabでホテルへ。荷物を受け取り出発まで最後の休憩。</div>
+            <div class="tl-tags"><span class="tag tag-mrt">🚇 MRT S$1（Orchard→City Hall）</span><span class="tag tag-grab">or Grab S$7〜10</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">19:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🌃 夕食・Esplanade周辺の夜景散歩（任意）</div>
+            <div class="tl-desc">ホテル周辺で軽く夕食を取るか、ラッフルズ前・エスプラネードを夜散歩。疲れていればホテルで休憩してOK。</div>
+            <div class="tl-tags"><span class="tag tag-free">無料</span><span class="tag tag-walk">徒歩圏・任意</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">22:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot key"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🚗 Grab でチャンギ空港へ出発（←22:00に前倒し）</div>
+            <div class="tl-desc">ラウンジでシャワーを使うため余裕を持って出発。MRT終電では間に合わないためGrab一択。スーツケースあり。22:35頃空港着。</div>
+            <div class="tl-tags"><span class="tag tag-grab">Grab S$35〜55 / 約35分</span><span class="tag tag-note">⚠️ MRT終電で行けない</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">22:35</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">✈️ チャンギ空港 Terminal 2 着・チェックイン・出国</div>
+            <div class="tl-desc">SQ672チェックイン → 預け荷物 → 保安検査 → 出国審査。深夜帯は比較的スムーズ（約30〜40分）。</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">23:15</div></div>
+          <div class="tl-dot-col"><div class="tl-dot key"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🛋️ SATS Premier Lounge 入場</div>
+            <div class="tl-desc">Level 3・24時間営業。アメックスプラチナで妻も無料。<strong>シャワー3室</strong>あり（深夜は空きやすい）。ビュッフェ・アルコール無料・マッサージチェアで約1時間リラックス。</div>
+            <div class="tl-tags">
+              <span class="tag tag-free">アメックス/PPで2名無料</span>
+              <span class="tag tag-indoor">🚿 シャワー3室あり</span>
+              <span class="tag tag-price">アルコール無料</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">00:50</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🚶 搭乗ゲートへ移動</div>
+            <div class="tl-desc">余裕を持ってゲートへ。</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">01:20</div></div>
+          <div class="tl-dot-col"><div class="tl-dot key"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🛫 SQ672 出発 → 名古屋（5/26 09:00着）</div>
+            <div class="tl-desc">約7時間40分のフライト。シャワー後スッキリした状態で帰国！お疲れさまでした。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 予算概算 -->
+  <div class="section">
+    <div class="section-title"><div class="icon">💰</div>予算概算（2名）</div>
+    <div class="budget-grid">
+      <div class="budget-item"><div class="b-icon">⌚</div><div class="b-label">AP Café（アフタヌーン）</div><div class="b-price">S$80〜120</div></div>
+      <div class="budget-item"><div class="b-icon">🎨</div><div class="b-label">ArtScience Museum</div><div class="b-price free">無料</div></div>
+      <div class="budget-item"><div class="b-icon">⛵</div><div class="b-label">Sampan Ride</div><div class="b-price free">無料</div></div>
+      <div class="budget-item"><div class="b-icon">🌅</div><div class="b-label">Skypark 展望デッキ</div><div class="b-price free">無料</div></div>
+      <div class="budget-item"><div class="b-icon">💡</div><div class="b-label">Digital Light Canvas（任意）</div><div class="b-price">S$10</div></div>
+      <div class="budget-item"><div class="b-icon">🦀</div><div class="b-label">PALM BEACH（チリクラブ）</div><div class="b-price">S$150〜170</div></div>
+      <div class="budget-item"><div class="b-icon">🍗</div><div class="b-label">CHATTERBOX（ランチ）</div><div class="b-price">S$60〜80</div></div>
+      <div class="budget-item"><div class="b-icon">🚇</div><div class="b-label">MRT（空港往復+Orchard）</div><div class="b-price">S$5〜8</div></div>
+      <div class="budget-item"><div class="b-icon">🚗</div><div class="b-label">Grab（ベイ内移動+深夜空港）</div><div class="b-price">S$55〜90</div></div>
+    </div>
+    <div class="budget-total">
+      <div class="bt-label">合計目安（2名・交通費込み）</div>
+      <div class="bt-price">S$ 360 〜 478</div>
+      <div class="bt-note">楽天特典でアトラクション3つ無料（約S$90相当節約）<br>MRT活用でGrab全利用比較して約S$30〜40追加節約</div>
+    </div>
+  </div>
+
+  <!-- 代替案 -->
+  <div class="section">
+    <div class="section-title"><div class="icon">🔄</div>削れる候補・代替プラン</div>
+    <div class="alt-list">
+      <div class="alt-item"><div class="alt-icon">✂️</div><div class="alt-text"><strong>Digital Light Canvas は省略OK</strong><span>MBS内B2・予約不要・S$5/人。ArtScience Museumと体験が似ているため省略しても悔いなし。</span></div></div>
+      <div class="alt-item"><div class="alt-icon">✂️</div><div class="alt-text"><strong>Day3 オーチャード散策 → ホテル直帰に変更可</strong><span>CHATTERBOXランチ後、買い物なしでMRTでホテルへ直帰もOK。最終日は無理しない判断が◎。</span></div></div>
+      <div class="alt-item"><div class="alt-icon">🔄</div><div class="alt-text"><strong>チリクラブを JUMBO Seafood（Clarke Quay店）に変更</strong><span>PALM BEACHが予約取れない場合の代替。Clarke Quayの川沿いで雰囲気よし。ホテルからGrab10〜15分。<br><a href="https://www.jumboseafood.com.sg/en/home/" target="_blank" style="color:#3182ce;font-size:11px;">🔗 JUMBO公式サイト</a></span></div></div>
+      <div class="alt-item"><div class="alt-icon">➕</div><div class="alt-text"><strong>Gardens by the Bay 無料ライトショー（毎晩19:45・20:45）</strong><span>MBSから徒歩圏内。Supertreeのライトアップショー（無料）。Day2 PALM BEACHの後、体力に余裕があれば。</span></div></div>
+    </div>
+  </div>
+
+  <!-- ライトショー参考情報 -->
+  <div class="section">
+    <div class="section-title"><div class="icon">✨</div>夜のライトショー（参考・行動プランは未確定）</div>
+    <div class="alert alert-blue" style="margin-bottom:14px;font-size:12px;">
+      📍 <strong>どちらも無料・毎日開催・MBSエリアから徒歩圏内。</strong>タイムラインには未組み込みですが、余力があれば立ち寄れるスポットです。マップにもピンを追加済み。
+    </div>
+    <div class="lightshow-grid">
+
+      <!-- Spectra -->
+      <div class="lightshow-card">
+        <div class="lightshow-header" style="background:linear-gradient(135deg,#1a3a5c,#7c3aed);">💧 Spectra — 光・水・レーザーショー</div>
+        <div class="lightshow-body">
+          <div class="ls-title">Marina Bay Sands主催の大型無料ショー</div>
+          <div class="ls-row">
+            <div>📍 MBS Event Plaza（The Shoppes at MBS 1F）</div>
+            <div>🕐 日〜木：<strong>20:00 / 21:00</strong>（各約15分）</div>
+            <div>🕐 金・土：<strong>20:00 / 21:00 / 22:00</strong></div>
+            <div>💰 <strong>無料</strong>（観覧エリアは屋外・立見）</div>
+            <div>⚠️ 悪天候時は中止の場合あり</div>
+          </div>
+          <div style="font-size:11px;color:#718096;margin-top:6px;line-height:1.6;">噴水・カラーレーザー・ミスト・オーケストラBGMを組み合わせた約15分のショー。毎週3万人が観覧するMBS人気No.1無料アトラクション。</div>
+          <div class="ref-links" style="margin-top:10px;">
+            <a href="https://www.marinabaysands.com/attractions/spectra.html" target="_blank" class="ref-link">MBS公式ページ</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Garden Rhapsody -->
+      <div class="lightshow-card">
+        <div class="lightshow-header" style="background:linear-gradient(135deg,#0f4c35,#16a34a);">🌳 Garden Rhapsody — スーパーツリーショー</div>
+        <div class="lightshow-body">
+          <div class="ls-title">高さ25〜50mの巨大人工樹木がライトアップ</div>
+          <div class="ls-row">
+            <div>📍 Gardens by the Bay / Supertree Grove</div>
+            <div>🕐 <strong>毎日 19:45 / 20:45</strong>（各約15分）</div>
+            <div>💰 <strong>無料</strong>（Gardens入園料は不要）</div>
+            <div>🎨 5月テーマ：<strong>「World of Fantasy」</strong></div>
+            <div style="font-size:11px;color:#718096;">（魔法・宇宙・海・冒険をテーマにした光と音楽）</div>
+          </div>
+          <div style="font-size:11px;color:#718096;margin-top:6px;line-height:1.6;">月ごとにテーマが変わる。MBSから徒歩10〜15分。SpectraとセットでDay2夕食後に立ち寄れる動線。</div>
+          <div class="ref-links" style="margin-top:10px;">
+            <a href="https://www.gardensbythebay.com.sg/en/things-to-do/calendar-of-events/garden-rhapsody.html" target="_blank" class="ref-link">Gardens by the Bay公式</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-yellow" style="margin-top:12px;font-size:12px;">
+      💡 <strong>動線メモ：</strong>PALM BEACH（18:30〜20:30）→ 徒歩5分でSpectra 21:00回 → 徒歩10分でGarden Rhapsody（20:45は終わっているため次の機会に）。または Day2/3のどちらかでGardens by the Bayを19:45に先に観てからSpectraへ移動するルートも。
+    </div>
+  </div>
+
+  <!-- 実用メモ -->
+  <div class="section">
+    <div class="section-title"><div class="icon">💡</div>現地実用メモ</div>
+    <div class="info-grid">
+      <div class="info-card"><div class="ic-icon">🌡️</div><div class="ic-title">5月の気候</div><div class="ic-body">平均29.5℃・湿度84%。午後はスコールが多い。折りたたみ傘＋日焼け止め必携。12〜16時は屋内活動推奨。</div></div>
+      <div class="info-card"><div class="ic-icon">💳</div><div class="ic-title">キャッシュレス</div><div class="ic-body">Visa/Masterはほぼ全店OK。MRTはタッチ決済対応。ホーカー（屋台）は現金のみの場合あり。SGD20〜30用意。</div></div>
+      <div class="info-card"><div class="ic-icon">🤝</div><div class="ic-title">チップ</div><div class="ic-body">基本不要。レストランは10%サービス料＋8% GSTが料金に含まれている。</div></div>
+      <div class="info-card"><div class="ic-icon">📱</div><div class="ic-title">SIM / 通信</div><div class="ic-body">チャンギ空港到着後すぐ購入。M1 Tourist SIMが15日間S$8〜12。Grab設定のため到着直後が吉。</div></div>
+      <div class="info-card"><div class="ic-icon">🚗</div><div class="ic-title">Grab（配車）</div><div class="ic-body">日本のカード登録可。アプリで料金が先に確認できる。深夜・荷物ありの移動に特に重宝する。</div></div>
+      <div class="info-card"><div class="ic-icon">🗣️</div><div class="ic-title">言語・通貨</div><div class="ic-body">英語が通じる。通貨はSGD（シンガポールドル）。1SGD≒115円目安。現地ATMでも引き出し可能。</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">シンガポール旅行プラン 2026.05.23〜26 ｜ SQ671/672 ｜ Wyndham Singapore Hotel × MBS 楽天ダイヤモンド特典フル活用</div>
+
+<script>
+// チェックボックス
+function toggleCheck(el) { el.classList.toggle('done'); }
+
+// タブ切り替え
+function showTab(id) {
+  document.querySelectorAll('.transport-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.transport-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Leaflet 地図
+const map = L.map('map', { zoomControl: true });
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19
+}).addTo(map);
+
+function makeIcon(emoji, color) {
+  return L.divIcon({
+    html: `<div style="
+      background:${color};
+      width:34px;height:34px;border-radius:50% 50% 50% 0;
+      transform:rotate(-45deg);
+      border:3px solid white;
+      box-shadow:0 2px 8px rgba(0,0,0,0.3);
+      display:flex;align-items:center;justify-content:center;
+    "><span style="transform:rotate(45deg);font-size:15px;line-height:1;">${emoji}</span></div>`,
+    className: '',
+    iconSize: [34, 34],
+    iconAnchor: [17, 34],
+    popupAnchor: [0, -36]
+  });
+}
+
+const spots = [
+  { lat: 1.2914, lng: 103.8489, emoji: '🏨', color: '#2563eb', name: 'Wyndham Singapore Hotel（拠点）', desc: '3-5 Coleman Street, City Hall<br>最寄り：City Hall駅（徒歩3〜5分）' },
+  { lat: 1.2952, lng: 103.8523, emoji: '⌚', color: '#d97706', name: 'AP Café at Raffles Hotel', desc: 'Bar & Billiard Room内<br>営業 11:00〜20:00 ｜ 要予約<br>ホテルから徒歩5分' },
+  { lat: 1.2870, lng: 103.8596, emoji: '🎨', color: '#dc2626', name: 'ArtScience Museum（MBS）', desc: 'Marina Bay Sands内<br>楽天特典で無料 ｜ 10:00〜19:00' },
+  { lat: 1.2838, lng: 103.8605, emoji: '⛵', color: '#dc2626', name: 'Sampan Ride（MBS B2）', desc: 'The Shoppes at MBS 地下B2<br>楽天特典で無料 ｜ 要時間予約' },
+  { lat: 1.2836, lng: 103.8607, emoji: '🌅', color: '#dc2626', name: 'Skypark Observation Deck', desc: 'MBS Tower 3 56階<br>楽天特典で無料 ｜ 11:00〜21:00' },
+  { lat: 1.2865, lng: 103.8536, emoji: '🦀', color: '#16a34a', name: 'PALM BEACH Seafood', desc: 'One Fullerton（マーライオン公園隣）<br>Day2 18:30〜ディナー ｜ チリクラブ<br>MBSの夜景を眺めながら' },
+  { lat: 1.2869, lng: 103.8544, emoji: '🦁', color: '#16a34a', name: 'マーライオン公園', desc: '無料 ｜ 夜景・記念撮影スポット<br>PALM BEACHへの道すがら立ち寄り' },
+  { lat: 1.2804, lng: 103.8503, emoji: '🍜', color: '#16a34a', name: 'Lau Pa Sat（ラウパサ）', desc: 'Day1の夕食候補<br>屋台街 ｜ チキンライス・サテーなど<br>気軽に食べられる' },
+  { lat: 1.3048, lng: 103.8318, emoji: '🍗', color: '#16a34a', name: 'CHATTERBOX（ヒルトンオーチャード）', desc: 'Day3 ランチ 12:30〜<br>MRT City Hall→Orchard 7分・S$1<br>チキンライス・ラクサの名店' },
+  { lat: 1.2816, lng: 103.8636, emoji: '🌳', color: '#d97706', name: 'Garden Rhapsody（Gardens by the Bay）', desc: 'Supertree Grove ｜ <strong>毎日 19:45・20:45</strong><br>無料・約15分 ｜ 5月テーマ：World of Fantasy<br><small>MBSから徒歩10〜15分</small>' },
+  { lat: 1.2842, lng: 103.8582, emoji: '✨', color: '#7c3aed', name: 'Spectra（MBS 光と水のショー）', desc: 'MBS Event Plaza（The Shoppes 1F）<br><strong>日〜木 20:00・21:00 / 金土 +22:00</strong><br>無料・約15分 ｜ 雨天中止の場合あり' },
+  { lat: 1.3644, lng: 103.9915, emoji: '✈️', color: '#7c3aed', name: 'チャンギ空港', desc: 'Terminal 1：SQ671到着（5/23 16:00）<br>Terminal 2：SQ672出発（5/26 01:20）' },
+  // --- 検討中・参考スポット ---
+  { lat: 1.2889, lng: 103.8447, emoji: '🦀', color: '#0e7490', name: '🔵 JUMBO Seafood（Clarke Quay）', desc: '30 Merchant Rd, Riverside Point<br>チリクラブ ｜ 11:30〜14:30 / 17:30〜23:00<br>S$150〜200（2名）｜ 要予約<br><small>PALMBEACHの代替候補 ｜ 川沿いテラス席</small>' },
+  { lat: 1.2896, lng: 103.8569, emoji: '🍢', color: '#0e7490', name: '🔵 Makansutra Gluttons Bay（屋外ホーカー）', desc: 'エスプラネード・シアターズ横<br>17:00〜深夜2〜3時 ｜ S$30〜50（2名）<br>サテー・BBQエイ・チキンウィング<br><small>MBS夜景を見ながら屋外で食事できる</small>' },
+  { lat: 1.2803, lng: 103.8447, emoji: '🏮', color: '#0e7490', name: '🔵 Maxwell Food Centre（チャイナタウン）', desc: '1 Kadayanallur St ｜ 8:00〜22:00<br>S$5〜15/品 ｜ 天天海南鶏飯（ミシュランビブグルマン）<br><small>City Hallから Grab 10〜15分</small>' },
+  { lat: 1.2890, lng: 103.8478, emoji: '🍲', color: '#b45309', name: '⭐ Song Fa Bak Kut Teh（肉骨茶）', desc: '11 New Bridge Road ｜ ミシュランビブグルマン<br>9:00〜21:00 ｜ S$30〜40（2名）<br>白胡椒ペッパースープ ｜ スープお代わり自由<br><small>予約不要・City Hallから徒歩15分 or MRT1駅</small>' },
+];
+
+const markers = [];
+spots.forEach(s => {
+  const marker = L.marker([s.lat, s.lng], { icon: makeIcon(s.emoji, s.color) })
+    .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:12px;color:#555;">${s.desc}</span>`, { maxWidth: 220 })
+    .addTo(map);
+  markers.push(marker);
+});
+
+// 全マーカーが収まる範囲に自動フィット（少しパディング）
+const group = new L.featureGroup(markers);
+map.fitBounds(group.getBounds().pad(0.08));
+
+// 外部プレビュー環境でのサイズ再計算（htmlpreview等対応）
+setTimeout(() => { map.invalidateSize(); map.fitBounds(group.getBounds().pad(0.08)); }, 300);
+window.addEventListener('load', () => { map.invalidateSize(); map.fitBounds(group.getBounds().pad(0.08)); });
+</script>
+</body>
+</html>
