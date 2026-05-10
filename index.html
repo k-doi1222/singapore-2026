@@ -274,6 +274,12 @@
     .info-card .ic-title { font-size: 12px; font-weight: 700; margin-bottom: 3px; color: #1a3a5c; }
     .info-card .ic-body { font-size: 12px; color: #718096; line-height: 1.7; }
 
+    /* アコーディオン */
+    .collapsible-section > .section-title { cursor: pointer; user-select: none; }
+    .toggle-icon { margin-left: auto; font-size: 13px; color: #a0aec0; transition: transform 0.2s; flex-shrink: 0; }
+    .toggle-icon.open { transform: rotate(180deg); }
+    .collapsible-content { }
+
     .footer { text-align: center; padding: 20px; color: #a0aec0; font-size: 11px; }
     .lightshow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media(max-width:560px){ .lightshow-grid { grid-template-columns: 1fr; } }
@@ -371,14 +377,178 @@
         </div>
       </div>
     </div>
-    <div class="alert alert-yellow" style="margin-top:12px; font-size:12px;">
-      ⚠️ <strong>帰りの重要メモ：</strong>SQ672は5月26日（火）01:20発。MRTの終電は深夜0時頃のため利用不可。
-      5月25日（月）<strong>22:00にGrabでホテルを出発</strong>（ラウンジ利用のため前倒し）→ 22:35チャンギT2着 → 出国後 <strong>SATS Premier Loungeでシャワー＆食事</strong> → 00:50ゲートへ。
+  </div>
+
+  <!-- 旅程概要（確定版） -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">📅</div>
+      旅程概要（確定スケジュール）
+    </div>
+    <div style="display:grid;gap:12px;">
+      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:14px 16px;">
+        <div style="font-weight:700;font-size:14px;color:#15803d;margin-bottom:10px;">Day 1 ｜ 5月23日（土）到着日</div>
+        <div style="display:grid;gap:6px;font-size:13px;color:#374151;">
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">16:00</span>チャンギ空港 T1 着（SQ671）・SIM購入</div>
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">17:30</span>MRTでホテル（City Hall）へ・チェックイン</div>
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">19:00</span><strong>🦀 JUMBO Seafood The Riverwalk</strong>（チリクラブ）<span style="background:#dcfce7;color:#166534;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;">✅ 予約確定</span></div>
+        </div>
+      </div>
+      <div style="background:#eff6ff;border:1px solid #93c5fd;border-radius:10px;padding:14px 16px;">
+        <div style="font-weight:700;font-size:14px;color:#1d4ed8;margin-bottom:10px;">Day 2 ｜ 5月24日（日）マリーナベイサンズ周辺・APカフェ,ラッフルズ</div>
+        <div style="display:grid;gap:6px;font-size:13px;color:#374151;">
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">10:00</span>マリーナベイサンズで楽天特典手続き・特典を使いつつ周辺観光</div>
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">16:00</span><strong>⌚ AP Café at Raffles Hotel</strong><span style="background:#dbeafe;color:#1e40af;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;">✅ 予約確定（AudemGWRJKWZ）</span></div>
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">17:45</span>🦁 マーライオン公園（立ち寄り）</div>
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">夜</span>夕食・散策・ライトショーとか</div>
+        </div>
+      </div>
+      <div style="background:#fef3c7;border:1px solid #fcd34d;border-radius:10px;padding:14px 16px;">
+        <div style="font-weight:700;font-size:14px;color:#92400e;margin-bottom:10px;">Day 3 ｜ 5月25日（月）オーチャード地区・その他地区観光・夜はジュエル→帰国</div>
+        <div style="display:grid;gap:6px;font-size:13px;color:#374151;">
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">午前</span>チェックアウト→オーチャード</div>
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">12:30</span><strong>🍗 CHATTERBOX ランチ</strong>（オーチャード）<span style="background:#fef9c3;color:#854d0e;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;">✅ 予約確定（RRUL7M）</span></div>
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">19:00〜</span>ジュエル（チャンギ空港）・夕食</div>
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">21:00</span>💧 Rain Vortex ライトショー → T2へ移動・出国</div>
+          <div><span style="color:#9ca3af;display:inline-block;min-width:60px;">22:00〜</span>🛋️ SATS Premier Lounge → 01:20 ✈️ SQ672 出発（5/26）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 行き先候補リスト -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🔍</div>
+      行き先候補リスト（訪問検討中）
+    </div>
+    <div style="font-size:12px;color:#64748b;margin-bottom:12px;">マップ上の破線マーカーのスポットです。日程に余裕があれば組み込みを検討。</div>
+
+    <div style="font-size:12px;font-weight:700;color:#16a34a;margin-top:14px;margin-bottom:6px;">🍽️ グルメ候補</div>
+    <div style="display:grid;gap:8px;margin-bottom:14px;">
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">🍲</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">Song Fa Bak Kut Teh（肉骨茶）</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">11 New Bridge Road。ミシュランビブグルマン。白胡椒ペッパースープ・スープお代わり自由。S$30〜40（2名）。予約不要。9:00〜21:00。</div>
+          <div style="margin-top:6px;"><a href="https://www.songfa.com.sg/" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Song Fa 公式サイト</a></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">🍢</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">Makansutra Gluttons Bay（屋外ホーカー）</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">エスプラネード前・海沿い屋外。17:00〜深夜。サテー・BBQエイ・チキンウィング。S$30〜50（2名）。マリーナベイサンズ夜景を望みながら食事できる。</div>
+          <div style="margin-top:6px;"><a href="https://makansutra.com/gluttons-bay/" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Makansutra 公式サイト</a></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">🍢</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">Maxwell Food Centre（B級グルメ屋台）</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">ローカル屋台が集まるフードセンター。天天海南鶏飯（ミシュランビブグルマン）が有名。S$5〜15/品。City HallからGrab10〜15分。</div>
+          <div style="margin-top:6px;"><a href="https://www.visitsingapore.com/see-do-singapore/eat-drink/hawker-culture/maxwell-food-centre/" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Visit Singapore（写真あり）</a></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">☕</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">Prada Café（プラダ カフェ）<span style="background:#fce7f3;color:#be185d;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;">要予約</span></div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">ION Orchard 2F・PRADAブティック内。ロンドンとシンガポールにしか存在しない希少なカフェ。ファッションハウスが手がける特別な空間でランチ・ティータイムを。</div>
+          <div style="margin-top:6px;"><a href="https://www.prada.com/jp/ja/pradasphere/special-projects/2025/prada-caffe-singapore-ion.html" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Prada 公式（写真あり）</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:12px;font-weight:700;color:#dc2626;margin-top:14px;margin-bottom:6px;">🎭 観光・散策</div>
+    <div style="display:grid;gap:8px;margin-bottom:14px;">
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">✨</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">Gardens by the Bay（Garden Rhapsody）</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">スーパーツリーの無料ライトショー。毎日19:45・20:45の2回。マリーナベイサンズから徒歩10〜15分。5月テーマ「World of Fantasy」。</div>
+          <div style="margin-top:6px;"><a href="https://www.gardensbythebay.com.sg/en/things-to-do/calendar-of-events/garden-rhapsody.html" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Gardens by the Bay 公式（写真あり）</a></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">✨</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">Spectra（マリーナベイサンズ 光と水のショー）</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">マリーナベイサンズ Event Plaza。日〜木 20:00・21:00 / 金土 +22:00。無料・約15分。AP Café後の夜景散策と組み合わせやすい。</div>
+          <div style="margin-top:6px;"><a href="https://www.marinabaysands.com/entertainment/spectra.html" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Marina Bay Sands 公式（写真あり）</a></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">📷</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">アラブストリート（Haji Lane）</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">イスラム文化エリア。カラフルな壁画・雑貨・カフェ・マスジット・スルタン。MRTブギス駅から徒歩10分（City HallからEW線2駅）。</div>
+          <div style="margin-top:6px;"><a href="https://www.visitsingapore.com/see-do-singapore/places-of-interest/arab-street/" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Visit Singapore（写真あり）</a></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">📷</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">カトン地区（Katong / Joo Chiat）</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">ペラナカン文化の発祥地。カラフルな洋館が続く写真映えスポット。カトンラクサ発祥の地。City HallからGrab15〜20分。</div>
+          <div style="margin-top:6px;"><a href="https://www.visitsingapore.com/see-do-singapore/places-of-interest/katong-joo-chiat/" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Visit Singapore（写真あり）</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:12px;font-weight:700;color:#dc2626;margin-top:14px;margin-bottom:6px;">🎭 観光・散策（楽天特典）</div>
+    <div style="display:grid;gap:8px;margin-bottom:14px;">
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">🎨</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">ArtScience Museum（チームラボ Future World）</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">チームラボFuture world。10:00〜19:00。1時間くらい。無料・予約が必要。</div>
+          <div style="margin-top:6px;"><a href="https://www.marinabaysands.com/museum.html" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 ArtScience Museum 公式（写真あり）</a></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">⛵</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">マリーナベイサンズ サンパンライド</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">マリーナベイサンズ内のボート乗れる。The Shoppes地下B2。無料・予約が必要。</div>
+          <div style="margin-top:6px;"><a href="https://www.marinabaysands.com/entertainment/sampan-rides.html" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Sampan Ride 公式（写真あり）</a></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-size:20px;line-height:1.2;">🌅</span>
+        <div>
+          <div style="font-weight:700;font-size:13px;">マリーナベイサンズ Skypark Observation Deck</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px;">マリーナベイサンズ屋上のパノラマビュー。無料・予約が必要。</div>
+          <div style="margin-top:6px;"><a href="https://www.marinabaysands.com/attractions/skypark-observation-deck.html" target="_blank" style="font-size:11px;color:#3182ce;text-decoration:none;">🔗 Skypark 公式（写真あり）</a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 地図 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🗺️</div>
+      主要スポット マップ
+    </div>
+    <div id="map"></div>
+    <div class="map-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#2563eb;border:2px solid white;"></div>🏨 ホテル（拠点）</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#16a34a;border:2px solid white;"></div>🍽️ グルメ（レストラン・屋台）</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#dc2626;border:2px solid white;"></div>🎭 観光・アトラクション・散策</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#7c3aed;border:2px solid white;"></div>✈️ 空港 / ✨ ライトショー</div>
+      <div class="legend-item" style="margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0;">
+        <div style="display:flex;gap:12px;font-size:11px;color:#718096;">
+          <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#888;border:2px solid white;margin-right:3px;vertical-align:middle;"></span>実線＝確定</span>
+          <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#888;opacity:0.6;border:2px dashed rgba(80,80,80,0.7);margin-right:3px;vertical-align:middle;"></span>破線＝候補</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- ラウンジ情報 -->
-  <div class="section">
+  <div class="section collapsible-section">
     <div class="section-title">
       <div class="icon">🛋️</div>
       ラウンジ情報（アメックスプラチナ＋プライオリティパス）
@@ -453,13 +623,17 @@
           </div>
 
           <div class="lounge-timeline">
-            <div class="lt-title">📋 推奨タイムライン（01:20発）← Day3更新済み</div>
-            <div class="lt-row"><span class="lt-time">22:00</span><span class="lt-desc">ホテル出発（Grab）← 21:00→22:00に前倒し</span></div>
-            <div class="lt-row"><span class="lt-time">22:35</span><span class="lt-desc">チャンギ空港 T2 到着</span></div>
-            <div class="lt-row"><span class="lt-time">22:35〜23:15</span><span class="lt-desc">SQ672チェックイン・預け荷物・保安検査・出国審査</span></div>
-            <div class="lt-row"><span class="lt-time">23:15</span><span class="lt-desc">🛋️ SATS Premier Lounge 入場</span></div>
-            <div class="lt-row"><span class="lt-time">23:15〜24:00</span><span class="lt-desc">シャワー（2名順番に）・食事・アルコール・マッサージチェア</span></div>
-            <div class="lt-row"><span class="lt-time">00:50</span><span class="lt-desc">ラウンジを出て搭乗ゲートへ</span></div>
+            <div class="lt-title">📋 推奨タイムライン（ジュエル経由・01:20発）</div>
+            <div class="lt-row"><span class="lt-time">18:00</span><span class="lt-desc">ホテル出発（Grab）→ ジュエルへ</span></div>
+            <div class="lt-row"><span class="lt-time">18:45</span><span class="lt-desc">ジュエル着・Smarte Carteで荷物預け</span></div>
+            <div class="lt-row"><span class="lt-time">19:15〜20:20</span><span class="lt-desc">ジュエル内で夕食（Kam's Roast or Din Tai Fung）</span></div>
+            <div class="lt-row"><span class="lt-time">20:20〜21:00</span><span class="lt-desc">Rain Vortex周辺を散策・写真撮影</span></div>
+            <div class="lt-row"><span class="lt-time">21:00〜21:10</span><span class="lt-desc">✨ Rain Vortex ライト＆ミュージックショー</span></div>
+            <div class="lt-row"><span class="lt-time">21:15</span><span class="lt-desc">荷物受取 → T2へリンクブリッジで移動（徒歩5〜10分）</span></div>
+            <div class="lt-row"><span class="lt-time">21:30〜22:00</span><span class="lt-desc">SQ672チェックイン・預け荷物・保安検査・出国審査</span></div>
+            <div class="lt-row"><span class="lt-time">22:00</span><span class="lt-desc">🛋️ SATS Premier Lounge 入場</span></div>
+            <div class="lt-row"><span class="lt-time">22:00〜00:20</span><span class="lt-desc">シャワー（2名）・食事・アルコール・マッサージチェアでゆっくり</span></div>
+            <div class="lt-row"><span class="lt-time">00:20</span><span class="lt-desc">ラウンジを出て搭乗ゲートへ</span></div>
             <div class="lt-row"><span class="lt-time">01:20</span><span class="lt-desc">✈️ SQ672 出発 → 名古屋09:00着</span></div>
           </div>
           <div class="ref-links">
@@ -477,26 +651,8 @@
     </div>
   </div>
 
-  <!-- 地図 -->
-  <div class="section">
-    <div class="section-title">
-      <div class="icon">🗺️</div>
-      主要スポット マップ
-    </div>
-    <div id="map"></div>
-    <div class="map-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>🏨 ホテル（拠点）</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#dc2626"></div>🎭 観光・アトラクション</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#16a34a"></div>🍽️ レストラン（確定）</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div>✈️ 空港 / ✨ ライトショー</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#d97706"></div>🌳 Gardens / AP Café</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#0e7490"></div>🔵 屋台・検討中グルメ</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#b45309"></div>⭐ バクテイ（妻リクエスト）</div>
-    </div>
-  </div>
-
   <!-- 移動手段ガイド -->
-  <div class="section">
+  <div class="section collapsible-section">
     <div class="section-title">
       <div class="icon">🚌</div>
       移動手段ガイド：Grab vs MRT vs 徒歩
@@ -535,7 +691,7 @@
         <div class="rec-route">
           <div class="rec-route-icon">🏖️</div>
           <div class="rec-route-body">
-            <div class="rec-route-title">Day2｜ホテル（City Hall）→ MBS（Bayfront）</div>
+            <div class="rec-route-title">Day2｜ホテル（City Hall）→ マリーナベイサンズ（Bayfront）</div>
             <div class="rec-route-detail">
               <strong>おすすめ：Grab（S$4〜6）</strong><br>
               MRTでも行けるが乗り換えがあり却って面倒。Grabなら5分でドア to ドア。朝イチはGrabで移動し、帰りは夜のベイ沿い散歩もあり。<br>
@@ -608,7 +764,7 @@
           <div class="route-cell rec">🚇 MRT<br>（行きのみ）</div>
         </div>
         <div class="route-row">
-          <div class="route-cell">🏨 ホテル → MBS</div>
+          <div class="route-cell">🏨 ホテル → マリーナベイサンズ</div>
           <div class="route-cell">S$1〜2<br>乗り換えあり</div>
           <div class="route-cell">S$4〜6<br>約5分</div>
           <div class="route-cell rec">🚗 Grab<br>or 徒歩</div>
@@ -620,7 +776,7 @@
           <div class="route-cell rec">🚶 徒歩5分</div>
         </div>
         <div class="route-row">
-          <div class="route-cell">🦀 MBS → Palm Beach</div>
+          <div class="route-cell">🦀 マリーナベイサンズ → Palm Beach</div>
           <div class="route-cell">不要</div>
           <div class="route-cell">S$4〜6</div>
           <div class="route-cell rec">🚶 徒歩10〜15分</div>
@@ -665,7 +821,7 @@
           <div class="tip-body">
             <span class="mrt-badge mrt-ns">NS</span>North-South Line（赤）…City Hall〜Orchard直通<br>
             <span class="mrt-badge mrt-ew">EW</span>East-West Line（緑）…City Hall〜チャンギ空港<br>
-            <span class="mrt-badge mrt-cc">CC</span>Circle Line（黄）…Bayfront（MBS）へ<br>
+            <span class="mrt-badge mrt-cc">CC</span>Circle Line（黄）…Bayfront（マリーナベイサンズ）へ<br>
             <span class="mrt-badge mrt-te">TE</span>Thomson-East Coast Line（茶）…新線・便利
           </div>
         </div>
@@ -691,21 +847,21 @@
   </div>
 
   <!-- 調査で判明した修正ポイント -->
-  <div class="section">
+  <div class="section collapsible-section">
     <div class="section-title">
       <div class="icon">🔍</div>
       調査で判明した重要ポイント
     </div>
-    <div class="alert alert-red"><strong>⌚ AP Café は閉店20:00 → 16:00台の訪問を設定</strong><br>営業11:00〜20:00。座席数が屋内約12席と少ないため事前予約が必須。16:00〜17:30でAP Caféを楽しみ、その後徒歩10分でPALM BEACHへ。</div>
+    <div class="alert alert-red"><strong>⌚ AP Café は閉店20:00 → 16:00台の訪問を設定</strong><br>営業11:00〜20:00。座席数が屋内約12席と少ないため事前予約が必須。16:00〜17:30でAP Caféを楽しみ、その後マーライオン公園方面へ散策。</div>
     <div class="alert alert-green"><strong>⛵ Sampan Ride は楽天特典で無料！外部予約不要</strong><br>Sands LifeStyleカウンターでエリートアップグレード時に時間枠を予約する。外部サイトでの事前購入は不要。</div>
     <div class="alert alert-yellow"><strong>⚠️ 楽天チケット「1日2枚まで」の可能性 → Day2/Day3に分散</strong><br>Day2：ArtScience Museum＋Sampan Ride（各2枚）。Day3：Skypark（2枚）に分けて利用が安全。カウンターで利用ルールを確認すること。</div>
   </div>
 
   <!-- 楽天ダイヤモンド特典ガイド -->
-  <div class="section">
+  <div class="section collapsible-section">
     <div class="section-title">
       <div class="icon">💎</div>
-      楽天ダイヤモンド × MBS 特典ガイド
+      楽天ダイヤモンド × マリーナベイサンズ 特典ガイド
     </div>
     <div class="rakuten-guide">
       <div class="rakuten-header">💎 楽天ダイヤモンド → Sands LifeStyle「エリート」3ヶ月無料アップグレード（〜2027年2月有効）</div>
@@ -724,7 +880,7 @@
           <div class="step-num">1</div>
           <div class="step-content">
             <strong>Sands LifeStyleカウンターへ直行</strong>
-            <span>場所：MBS Tower 1 ロビー（ホテル入口付近）｜ 営業：10:00〜22:30<br>所要：5〜15分。MBS到着後まず最初に向かう。</span>
+            <span>場所：マリーナベイサンズ Tower 1 ロビー（ホテル入口付近）｜ 営業：10:00〜22:30<br>所要：5〜15分。マリーナベイサンズ到着後まず最初に向かう。</span>
           </div>
         </div>
         <div class="rakuten-step">
@@ -745,12 +901,12 @@
         <ul class="caution-list">
           <li>1日2枚（＝2人で1アトラクション）の利用制限報告あり → Day2とDay3に分けて使うと安心</li>
           <li>Wi-Fi不安定対策：楽天アプリのランク画面を<strong>出発前にスクリーンショット保存</strong>（必須）</li>
-          <li>MBSへの宿泊は不要。ウィンダム宿泊でも特典を受けられる</li>
+          <li>マリーナベイサンズへの宿泊は不要。ウィンダム宿泊でも特典を受けられる</li>
           <li>カウンターは英語のみ。日本語スタッフはいないと想定しておく</li>
         </ul>
         <div class="ref-links" style="margin-top:14px;">
           <span class="ref-links-label">参考：</span>
-          <a href="https://www.marinabaysands.com/sands-lifestyle/sands-alliance-partners/rakuten.html" target="_blank" class="ref-link">MBS × 楽天 公式</a>
+          <a href="https://www.marinabaysands.com/sands-lifestyle/sands-alliance-partners/rakuten.html" target="_blank" class="ref-link">マリーナベイサンズ × 楽天 公式</a>
           <a href="https://www.marinabaysands.com/" target="_blank" class="ref-link">Marina Bay Sands 公式</a>
           <a href="https://corp.rakuten.co.jp/news/press/2024/0528_01.html" target="_blank" class="ref-link">楽天プレスリリース</a>
         </div>
@@ -759,7 +915,7 @@
   </div>
 
   <!-- AP Café詳細 -->
-  <div class="section">
+  <div class="section collapsible-section">
     <div class="section-title">
       <div class="icon">⌚</div>
       AP Café（オーデマピゲ カフェ）詳細
@@ -790,69 +946,72 @@
     </div>
   </div>
 
+  <!-- ライトショー参考情報 -->
+  <div class="section collapsible-section">
+    <div class="section-title"><div class="icon">✨</div>夜のライトショー（参考・行動プランは未確定）</div>
+    <div class="alert alert-blue" style="margin-bottom:14px;font-size:12px;">
+      📍 <strong>どちらも無料・毎日開催・マリーナベイサンズエリアから徒歩圏内。</strong>タイムラインには未組み込みですが、余力があれば立ち寄れるスポットです。マップにもピンを追加済み。
+    </div>
+    <div class="lightshow-grid">
+
+      <!-- Spectra -->
+      <div class="lightshow-card">
+        <div class="lightshow-header" style="background:linear-gradient(135deg,#1a3a5c,#7c3aed);">💧 Spectra — 光・水・レーザーショー</div>
+        <div class="lightshow-body">
+          <div class="ls-title">Marina Bay Sands主催の大型無料ショー</div>
+          <div class="ls-row">
+            <div>📍 マリーナベイサンズ Event Plaza（The Shoppes at マリーナベイサンズ 1F）</div>
+            <div>🕐 日〜木：<strong>20:00 / 21:00</strong>（各約15分）</div>
+            <div>🕐 金・土：<strong>20:00 / 21:00 / 22:00</strong></div>
+            <div>💰 <strong>無料</strong>（観覧エリアは屋外・立見）</div>
+            <div>⚠️ 悪天候時は中止の場合あり</div>
+          </div>
+          <div style="font-size:11px;color:#718096;margin-top:6px;line-height:1.6;">噴水・カラーレーザー・ミスト・オーケストラBGMを組み合わせた約15分のショー。毎週3万人が観覧するマリーナベイサンズ人気No.1無料アトラクション。</div>
+          <div class="ref-links" style="margin-top:10px;">
+            <a href="https://www.marinabaysands.com/attractions/spectra.html" target="_blank" class="ref-link">マリーナベイサンズ公式ページ</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Garden Rhapsody -->
+      <div class="lightshow-card">
+        <div class="lightshow-header" style="background:linear-gradient(135deg,#0f4c35,#16a34a);">🌳 Garden Rhapsody — スーパーツリーショー</div>
+        <div class="lightshow-body">
+          <div class="ls-title">高さ25〜50mの巨大人工樹木がライトアップ</div>
+          <div class="ls-row">
+            <div>📍 Gardens by the Bay / Supertree Grove</div>
+            <div>🕐 <strong>毎日 19:45 / 20:45</strong>（各約15分）</div>
+            <div>💰 <strong>無料</strong>（Gardens入園料は不要）</div>
+            <div>🎨 5月テーマ：<strong>「World of Fantasy」</strong></div>
+            <div style="font-size:11px;color:#718096;">（魔法・宇宙・海・冒険をテーマにした光と音楽）</div>
+          </div>
+          <div style="font-size:11px;color:#718096;margin-top:6px;line-height:1.6;">月ごとにテーマが変わる。マリーナベイサンズから徒歩10〜15分。SpectraとセットでDay2夕食後に立ち寄れる動線。</div>
+          <div class="ref-links" style="margin-top:10px;">
+            <a href="https://www.gardensbythebay.com.sg/en/things-to-do/calendar-of-events/garden-rhapsody.html" target="_blank" class="ref-link">Gardens by the Bay公式</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-yellow" style="margin-top:12px;font-size:12px;">
+      💡 <strong>動線メモ：</strong>Day2夕食後（〜20:30頃）→ 徒歩5分でSpectra 21:00回 → 徒歩10分でGarden Rhapsody（20:45は終わっているため次の機会に）。または Day2のどこかでGardens by the Bayを19:45に先に観てからSpectraへ移動するルートも。
+    </div>
+  </div>
+
   <!-- 出発前チェックリスト -->
-  <div class="section">
+  <div class="section collapsible-section">
     <div class="section-title">
       <div class="icon">📋</div>
       出発前にやること
     </div>
     <div class="checklist">
-      <div class="check-item done" onclick="toggleCheck(this)">
-        <div class="check-box"></div>
-        <div class="check-label">
-          <strong>JUMBO Seafood The Riverwalk を予約する（Day1 チリクラブ）</strong>
-          <span>✅ 予約確定：2026年5月23日（土）19:00 / 2名 / 予約確定済み</span>
-        </div>
-        <span class="badge-normal">予約済</span>
-      </div>
-      <div class="check-item done" onclick="toggleCheck(this)">
-        <div class="check-box"></div>
-        <div class="check-label">
-          <strong>AP Café を予約する（16:00台の枠で）</strong>
-          <span>✅ 予約確定：2026年5月24日（日）16:00 / 2名 / 確認番号：AudemGWRJKWZ<br>AP Café, Raffles Hotel Bar &amp; Billiard Room, 1 Beach Road, Singapore 189673</span>
-        </div>
-        <span class="badge-normal">予約済</span>
-      </div>
-      <div class="check-item done" onclick="toggleCheck(this)">
-        <div class="check-box"></div>
-        <div class="check-label">
-          <strong>CHATTERBOX を予約する</strong>
-          <span>✅ 予約確定：2026年5月25日（月）12:30 / 2名 / 確認番号：RRUL7M<br>
-          Hilton Singapore Orchard ｜ MRT City Hall→Orchard 7分</span>
-        </div>
-        <span class="badge-normal">予約済</span>
-      </div>
       <div class="check-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
         <div class="check-label">
-          <strong>楽天PointClubアプリでダイヤモンドランク画面をスクショ保存</strong>
-          <span>Sands LifeStyleカウンターで必須提示。複数枚保存してオフラインでも見られる状態に。</span>
+          <strong>携帯の世界ローミング設定をオンにする</strong>
+          <span>出発前にキャリアの設定でデータローミングを有効化。チャンギ着後すぐに使えるよう確認しておく。</span>
         </div>
         <span class="badge-urgent">必須</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="check-box"></div>
-        <div class="check-label">
-          <strong>Marina Bay Sands アプリをインストール・登録</strong>
-          <span>事前登録でSands LifeStyleカウンターの手続きがスムーズに。</span>
-        </div>
-        <span class="badge-normal">必須</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="check-box"></div>
-        <div class="check-label">
-          <strong>Grab アプリをインストール・日本のカードを登録</strong>
-          <span>出発前に登録しておくとチャンギ空港到着後すぐ使える。</span>
-        </div>
-        <span class="badge-normal">必須</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="check-box"></div>
-        <div class="check-label">
-          <strong>英語フレーズを確認</strong>
-          <span>"I'm a Rakuten Diamond member. I'd like to upgrade to Elite membership."</span>
-        </div>
-        <span class="badge-info">推奨</span>
       </div>
       <div class="check-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
@@ -866,7 +1025,7 @@
   </div>
 
   <!-- 日程プラン -->
-  <div class="section">
+  <div class="section collapsible-section">
     <div class="section-title">
       <div class="icon">📅</div>
       現地行動プラン
@@ -965,18 +1124,27 @@
         <div class="day-info">
           <div class="day-label">Day 2 ｜ 5月24日（日）</div>
           <div class="day-date">終日フリー</div>
-          <div class="day-theme">🌟 MBS制覇 + AP Café + 夜は自由</div>
+          <div class="day-theme">🌟 マリーナベイサンズ制覇 + AP Café + 夜は自由</div>
         </div>
       </div>
       <div class="tip-box">
-        <strong>🗺️ Day2の動線：</strong>ホテル →（Grab5分）→ MBS（楽天手続き＋ArtScience＋Sampan）→（徒歩15分）→ Raffles（AP Café 16:00〜）→ マーライオン公園 →（夕食TBD）→ ホテル。AP Café後、Spectra 21:00観覧も候補（MBSへ戻る or その場で観覧）。
+        <strong>🗺️ Day2の動線：</strong>ホテル →（Grab5分）→ マリーナベイサンズ（楽天手続き＋ArtScience＋Sampan）→（徒歩15分）→ Raffles（AP Café 16:00〜）→ マーライオン公園 →（夕食TBD）→ ホテル。AP Café後、Spectra 21:00観覧も候補（マリーナベイサンズへ戻る or その場で観覧）。
       </div>
       <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">9:45</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🚗 ホテル出発 → マリーナベイサンズへ</div>
+            <div class="tl-desc">GrabでBayfront方面へ。所要約5分。</div>
+            <div class="tl-tags"><span class="tag tag-grab">Grab S$4〜6 / 約5分</span></div>
+          </div>
+        </div>
         <div class="tl-item">
           <div class="tl-left"><div class="tl-time">10:00</div></div>
           <div class="tl-dot-col"><div class="tl-dot rakuten"></div></div>
           <div class="tl-content">
-            <div class="tl-title">💎 MBS Sands LifeStyleカウンターへ（最初に！）</div>
+            <div class="tl-title">💎 マリーナベイサンズ Sands LifeStyleカウンターへ（最初に！）</div>
             <div class="tl-desc">Tower 1ロビーのカウンターへ直行。楽天ダイヤモンド証明（スクショ）＋パスポートを提示しエリートにアップグレード。Sampan Rideの時間枠（13:30目安）もここで予約。所要5〜15分。</div>
             <div class="tl-tags"><span class="tag tag-free">無料化の要</span><span class="tag tag-note">英語："I'm a Rakuten Diamond member"</span></div>
           </div>
@@ -998,7 +1166,7 @@
           <div class="tl-dot-col"><div class="tl-dot food"></div></div>
           <div class="tl-content">
             <div class="tl-title">🍽️ ランチ｜The Shoppes 内で</div>
-            <div class="tl-desc">MBS内60以上の飲食店。屋内で休みながら。夕方にAP Caféがあるので軽めに。</div>
+            <div class="tl-desc">マリーナベイサンズ内60以上の飲食店。屋内で休みながら。夕方にAP Caféがあるので軽めに。</div>
             <div class="tl-tags"><span class="tag tag-indoor">屋内・冷房</span><span class="tag tag-price">S$15〜30/人</span></div>
           </div>
         </div>
@@ -1046,7 +1214,7 @@
           <div class="tl-dot-col"><div class="tl-dot move"></div></div>
           <div class="tl-content">
             <div class="tl-title">🦁 マーライオン公園（立ち寄り）</div>
-            <div class="tl-desc">AP Caféから徒歩10分。夕暮れのマーライオンと記念撮影。PALM BEACHへの動線上にある。</div>
+            <div class="tl-desc">AP Caféから徒歩10分。夕暮れのマーライオンと記念撮影。ベイエリアの夜景を楽しみながら。</div>
             <div class="tl-tags"><span class="tag tag-free">無料</span><span class="tag tag-walk">10〜15分</span></div>
           </div>
         </div>
@@ -1055,9 +1223,9 @@
           <div class="tl-dot-col"><div class="tl-dot food"></div></div>
           <div class="tl-content">
             <div class="tl-title">🍽️ 夕食｜未定（TBD）</div>
-            <div class="tl-desc">AP Café後の夕食。チリクラブはDay1（JUMBO）で済んでいるため、軽め or ライトショー観覧に切り替えも◎。候補：Lau Pa Sat・Makansutra Gluttons Bay・MBS内レストラン。</div>
+            <div class="tl-desc">AP Café後の夕食。チリクラブはDay1（JUMBO）で済んでいるため、軽め or ライトショー観覧に切り替えも◎。候補：Makansutra Gluttons Bay（屋外ホーカー）・マリーナベイサンズ内レストラン。</div>
             <div class="tl-tags">
-              <span class="tag tag-note">🔄 Spectra 21:00回も候補（MBS Event Plaza・無料）</span>
+              <span class="tag tag-note">🔄 Spectra 21:00回も候補（マリーナベイサンズ Event Plaza・無料）</span>
             </div>
           </div>
         </div>
@@ -1080,11 +1248,11 @@
         <div class="day-info">
           <div class="day-label">Day 3 ｜ 5月25日（月）〜 26日（火）</div>
           <div class="day-date">SQ672 SIN 01:20発（5/26）→ NGO 09:00着</div>
-          <div class="day-theme">🌅 Skypark + チキンライス + ゆったり帰路</div>
+          <div class="day-theme">🌅 Skypark + チキンライス + ジュエルで旅の締めくくり</div>
         </div>
       </div>
       <div class="tip-box">
-        <strong>🛋️ Day3のポイント：</strong>チェックアウト後も荷物はホテルに預けられます。帰りは<strong>22:00ホテル出発→チャンギ22:35着→出国後SATS Premier Loungeでシャワー＋食事（約1時間）→01:20出発</strong>の余裕あるプラン。MRTは深夜0時終電のためGrab一択。
+        <strong>💎 Day3のポイント：</strong>チェックアウト後はホテルに荷物を預けて身軽に行動。夕方は荷物を引き取りGrabでジュエルへ直行。<strong>Rain Vortex 21:00のライトショー</strong>を観てからT2に移動・出国。<strong>SATS Premier Loungeで22:00〜00:20ごろまで2時間以上ゆっくり</strong>シャワー＆食事を楽しめる。
       </div>
       <div class="timeline">
         <div class="tl-item">
@@ -1100,7 +1268,7 @@
           <div class="tl-dot-col"><div class="tl-dot attraction"></div></div>
           <div class="tl-content">
             <div class="tl-title">🌅 Skypark Observation Deck（展望デッキ）</div>
-            <div class="tl-desc">MBS56階から360°パノラマ。午前中は空いていて快適。Day2とチケットを分けて利用（楽天特典Day3分）。</div>
+            <div class="tl-desc">マリーナベイサンズ56階から360°パノラマ。午前中は空いていて快適。Day2とチケットを分けて利用（楽天特典Day3分）。</div>
             <div class="tl-tags"><span class="tag tag-free">楽天特典で無料（Day3に利用）</span><span class="tag tag-walk">所要45分</span><span class="tag tag-grab">Grab S$4〜6</span></div>
             <div class="ref-links no-border">
               <a href="https://www.marinabaysands.com/attractions/skypark-observation-deck.html" target="_blank" class="ref-link">Skypark 公式</a>
@@ -1111,9 +1279,9 @@
           <div class="tl-left"><div class="tl-time">12:15</div></div>
           <div class="tl-dot-col"><div class="tl-dot move"></div></div>
           <div class="tl-content">
-            <div class="tl-title">🚇 MRTでオーチャードへ移動</div>
-            <div class="tl-desc">City Hall駅（ホテル近く）→ Orchard駅。North-South Line直通・3駅・7分・S$1。</div>
-            <div class="tl-tags"><span class="tag tag-mrt">🚇 MRT NS線 直通 S$1 / 7分</span></div>
+            <div class="tl-title">🚗 MBSからオーチャードへ直行</div>
+            <div class="tl-desc">Bayfront（MBS近く）からGrabでオーチャードへ直行。ホテルに戻らず直接移動。</div>
+            <div class="tl-tags"><span class="tag tag-grab">🚗 Grab S$7〜10 / 約15分</span></div>
           </div>
         </div>
         <div class="tl-item">
@@ -1122,7 +1290,7 @@
           <div class="tl-content">
             <div class="tl-title">🍗 ランチ｜CHATTERBOX（チャターボックス）</div>
             <div class="tl-desc">Hilton Singapore Orchard内。シンガポール最高峰のチキンライス＆ラクサ。最終日にふさわしい贅沢なランチ。</div>
-            <div class="tl-tags"><span class="tag tag-reserve">予約済</span><span class="tag tag-price">S$60〜80（2名）</span><span class="tag tag-walk">所要1.5〜2時間</span></div>
+            <div class="tl-tags"><span class="tag tag-reserve">✅ 予約確定（RRUL7M）</span><span class="tag tag-price">S$110〜130（2名）</span><span class="tag tag-walk">所要1.5〜2時間</span></div>
             <div class="ref-links no-border">
               <a href="https://www.hiltonsingaporeorchard.com/restaurants/chatterbox/" target="_blank" class="ref-link">CHATTERBOX 公式</a>
               <a href="https://s.tabelog.com/singapore/A5504/A550401/55000013/" target="_blank" class="ref-link">食べログ（口コミ）</a>
@@ -1139,46 +1307,74 @@
           </div>
         </div>
         <div class="tl-item">
-          <div class="tl-left"><div class="tl-time">17:00</div></div>
+          <div class="tl-left"><div class="tl-time">16:30</div></div>
           <div class="tl-dot-col"><div class="tl-dot move"></div></div>
           <div class="tl-content">
-            <div class="tl-title">🏨 ホテルへ戻る・荷物受取・休憩</div>
-            <div class="tl-desc">MRT or Grabでホテルへ。荷物を受け取り出発まで最後の休憩。</div>
+            <div class="tl-title">🏨 ホテルへ戻る・荷物受取・出発準備</div>
+            <div class="tl-desc">MRT or GrabでCity Hallへ。スーツケースを受け取り、ジュエルへの出発に備えて身支度を整える。</div>
             <div class="tl-tags"><span class="tag tag-mrt">🚇 MRT S$1（Orchard→City Hall）</span><span class="tag tag-grab">or Grab S$7〜10</span></div>
           </div>
         </div>
         <div class="tl-item">
-          <div class="tl-left"><div class="tl-time">19:00</div></div>
-          <div class="tl-dot-col"><div class="tl-dot"></div></div>
+          <div class="tl-left"><div class="tl-time">18:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot key"></div></div>
           <div class="tl-content">
-            <div class="tl-title">🌃 夕食・Esplanade周辺の夜景散歩（任意）</div>
-            <div class="tl-desc">ホテル周辺で軽く夕食を取るか、ラッフルズ前・エスプラネードを夜散歩。疲れていればホテルで休憩してOK。</div>
-            <div class="tl-tags"><span class="tag tag-free">無料</span><span class="tag tag-walk">徒歩圏・任意</span></div>
+            <div class="tl-title">🚗 Grab でジュエル・チャンギ空港へ出発</div>
+            <div class="tl-desc">スーツケースを持って出発。ジュエルで夕食＋Rain Vortexを楽しんでからそのままT2へ。18:45ごろジュエル着。</div>
+            <div class="tl-tags"><span class="tag tag-grab">Grab S$35〜55 / 約35〜40分</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">18:45</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">💎 ジュエル到着・荷物を預ける</div>
+            <div class="tl-desc">Jewel L1のSmarte Carte（荷物預かり）へ。スーツケースを預けて身軽になってからショッピングモール内へ。24時間営業。</div>
+            <div class="tl-tags"><span class="tag tag-price">S$11〜16 / 個</span><span class="tag tag-note">L1・24時間営業</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">19:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot food"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🍽️ 夕食｜ジュエル内レストラン</div>
+            <div class="tl-desc">Rain Vortex目の前でシンガポール最後の食事。候補：<strong>Kam's Roast</strong>（香港ミシュランの焼き鴨・チャーシュー、気軽に入れる、S$50〜80）、<strong>Din Tai Fung</strong>（小籠包・炒め物、当日受付、S$60〜100）。いずれも21:00のRain Vortexを食後すぐ観覧できる好立地。</div>
+            <div class="tl-tags"><span class="tag tag-price">S$50〜100（2名）</span><span class="tag tag-walk">所要約1時間</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">20:15</div></div>
+          <div class="tl-dot-col"><div class="tl-dot attraction"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🌊 Rain Vortex 周辺を散策・写真撮影</div>
+            <div class="tl-desc">世界最大の屋内滝（高さ40m）を間近で。B1〜L4の各フロアで異なるアングルから撮影を楽しむ。ライトショー前のウォームアップ。</div>
+            <div class="tl-tags"><span class="tag tag-free">入場無料</span><span class="tag tag-walk">所要約35分</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">21:00</div></div>
+          <div class="tl-dot-col"><div class="tl-dot key"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">✨ Rain Vortex ライト＆ミュージックショー</div>
+            <div class="tl-desc">ライトと音楽で演出された約10〜15分のショー。月〜木は20:00・21:00の2回。B1滝下・L2展望エリアが特等席。無料で観覧できる旅の締めくくりにふさわしい体験。</div>
+            <div class="tl-tags"><span class="tag tag-free">無料</span><span class="tag tag-walk">約10〜15分</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-time">21:15</div></div>
+          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">🚶 T2へ移動・チェックイン・出国</div>
+            <div class="tl-desc">ジュエルからT2出発ホールへ屋根付きリンクブリッジで直結（徒歩5〜10分）。Smarte Carteで荷物を引き取ってからT2へ。SQ672チェックイン → 保安検査 → 出国審査（21:30〜22:00）。</div>
+            <div class="tl-tags"><span class="tag tag-walk">徒歩5〜10分（屋根付き）</span></div>
           </div>
         </div>
         <div class="tl-item">
           <div class="tl-left"><div class="tl-time">22:00</div></div>
           <div class="tl-dot-col"><div class="tl-dot key"></div></div>
           <div class="tl-content">
-            <div class="tl-title">🚗 Grab でチャンギ空港へ出発（←22:00に前倒し）</div>
-            <div class="tl-desc">ラウンジでシャワーを使うため余裕を持って出発。MRT終電では間に合わないためGrab一択。スーツケースあり。22:35頃空港着。</div>
-            <div class="tl-tags"><span class="tag tag-grab">Grab S$35〜55 / 約35分</span><span class="tag tag-note">⚠️ MRT終電で行けない</span></div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-time">22:35</div></div>
-          <div class="tl-dot-col"><div class="tl-dot move"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">✈️ チャンギ空港 Terminal 2 着・チェックイン・出国</div>
-            <div class="tl-desc">SQ672チェックイン → 預け荷物 → 保安検査 → 出国審査。深夜帯は比較的スムーズ（約30〜40分）。</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-time">23:15</div></div>
-          <div class="tl-dot-col"><div class="tl-dot key"></div></div>
-          <div class="tl-content">
             <div class="tl-title">🛋️ SATS Premier Lounge 入場</div>
-            <div class="tl-desc">Level 3・24時間営業。アメックスプラチナで妻も無料。<strong>シャワー3室</strong>あり（深夜は空きやすい）。ビュッフェ・アルコール無料・マッサージチェアで約1時間リラックス。</div>
+            <div class="tl-desc">Level 3・24時間営業。アメックスプラチナで妻も無料。<strong>シャワー3室</strong>あり（余裕を持って使える）。ビュッフェ・アルコール無料で2時間以上のんびりリラックス。</div>
             <div class="tl-tags">
               <span class="tag tag-free">アメックス/PPで2名無料</span>
               <span class="tag tag-indoor">🚿 シャワー3室あり</span>
@@ -1187,7 +1383,7 @@
           </div>
         </div>
         <div class="tl-item">
-          <div class="tl-left"><div class="tl-time">00:50</div></div>
+          <div class="tl-left"><div class="tl-time">00:20</div></div>
           <div class="tl-dot-col"><div class="tl-dot move"></div></div>
           <div class="tl-content">
             <div class="tl-title">🚶 搭乗ゲートへ移動</div>
@@ -1207,7 +1403,7 @@
   </div>
 
   <!-- 予算概算 -->
-  <div class="section">
+  <div class="section collapsible-section">
     <div class="section-title"><div class="icon">💰</div>予算概算（2名）</div>
     <div class="budget-grid">
       <div class="budget-item"><div class="b-icon">⌚</div><div class="b-label">AP Café（アフタヌーン）</div><div class="b-price">S$80〜120</div></div>
@@ -1215,83 +1411,20 @@
       <div class="budget-item"><div class="b-icon">⛵</div><div class="b-label">Sampan Ride</div><div class="b-price free">無料</div></div>
       <div class="budget-item"><div class="b-icon">🌅</div><div class="b-label">Skypark 展望デッキ</div><div class="b-price free">無料</div></div>
       <div class="budget-item"><div class="b-icon">💡</div><div class="b-label">Digital Light Canvas（任意）</div><div class="b-price">S$10</div></div>
-      <div class="budget-item"><div class="b-icon">🦀</div><div class="b-label">PALM BEACH（チリクラブ）</div><div class="b-price">S$150〜170</div></div>
-      <div class="budget-item"><div class="b-icon">🍗</div><div class="b-label">CHATTERBOX（ランチ）</div><div class="b-price">S$60〜80</div></div>
+      <div class="budget-item"><div class="b-icon">🦀</div><div class="b-label">JUMBO Seafood（チリクラブ）</div><div class="b-price">S$150〜200</div></div>
+      <div class="budget-item"><div class="b-icon">🍗</div><div class="b-label">CHATTERBOX（ランチ）</div><div class="b-price">S$110〜130</div></div>
       <div class="budget-item"><div class="b-icon">🚇</div><div class="b-label">MRT（空港往復+Orchard）</div><div class="b-price">S$5〜8</div></div>
       <div class="budget-item"><div class="b-icon">🚗</div><div class="b-label">Grab（ベイ内移動+深夜空港）</div><div class="b-price">S$55〜90</div></div>
     </div>
     <div class="budget-total">
       <div class="bt-label">合計目安（2名・交通費込み）</div>
-      <div class="bt-price">S$ 360 〜 478</div>
+      <div class="bt-price">S$ 410 〜 530</div>
       <div class="bt-note">楽天特典でアトラクション3つ無料（約S$90相当節約）<br>MRT活用でGrab全利用比較して約S$30〜40追加節約</div>
     </div>
   </div>
 
-  <!-- 代替案 -->
-  <div class="section">
-    <div class="section-title"><div class="icon">🔄</div>削れる候補・代替プラン</div>
-    <div class="alt-list">
-      <div class="alt-item"><div class="alt-icon">✂️</div><div class="alt-text"><strong>Digital Light Canvas は省略OK</strong><span>MBS内B2・予約不要・S$5/人。ArtScience Museumと体験が似ているため省略しても悔いなし。</span></div></div>
-      <div class="alt-item"><div class="alt-icon">✂️</div><div class="alt-text"><strong>Day3 オーチャード散策 → ホテル直帰に変更可</strong><span>CHATTERBOXランチ後、買い物なしでMRTでホテルへ直帰もOK。最終日は無理しない判断が◎。</span></div></div>
-      <div class="alt-item"><div class="alt-icon">🔄</div><div class="alt-text"><strong>チリクラブを JUMBO Seafood（Clarke Quay店）に変更</strong><span>PALM BEACHが予約取れない場合の代替。Clarke Quayの川沿いで雰囲気よし。ホテルからGrab10〜15分。<br><a href="https://www.jumboseafood.com.sg/en/home/" target="_blank" style="color:#3182ce;font-size:11px;">🔗 JUMBO公式サイト</a></span></div></div>
-      <div class="alt-item"><div class="alt-icon">➕</div><div class="alt-text"><strong>Gardens by the Bay 無料ライトショー（毎晩19:45・20:45）</strong><span>MBSから徒歩圏内。Supertreeのライトアップショー（無料）。Day2 PALM BEACHの後、体力に余裕があれば。</span></div></div>
-    </div>
-  </div>
-
-  <!-- ライトショー参考情報 -->
-  <div class="section">
-    <div class="section-title"><div class="icon">✨</div>夜のライトショー（参考・行動プランは未確定）</div>
-    <div class="alert alert-blue" style="margin-bottom:14px;font-size:12px;">
-      📍 <strong>どちらも無料・毎日開催・MBSエリアから徒歩圏内。</strong>タイムラインには未組み込みですが、余力があれば立ち寄れるスポットです。マップにもピンを追加済み。
-    </div>
-    <div class="lightshow-grid">
-
-      <!-- Spectra -->
-      <div class="lightshow-card">
-        <div class="lightshow-header" style="background:linear-gradient(135deg,#1a3a5c,#7c3aed);">💧 Spectra — 光・水・レーザーショー</div>
-        <div class="lightshow-body">
-          <div class="ls-title">Marina Bay Sands主催の大型無料ショー</div>
-          <div class="ls-row">
-            <div>📍 MBS Event Plaza（The Shoppes at MBS 1F）</div>
-            <div>🕐 日〜木：<strong>20:00 / 21:00</strong>（各約15分）</div>
-            <div>🕐 金・土：<strong>20:00 / 21:00 / 22:00</strong></div>
-            <div>💰 <strong>無料</strong>（観覧エリアは屋外・立見）</div>
-            <div>⚠️ 悪天候時は中止の場合あり</div>
-          </div>
-          <div style="font-size:11px;color:#718096;margin-top:6px;line-height:1.6;">噴水・カラーレーザー・ミスト・オーケストラBGMを組み合わせた約15分のショー。毎週3万人が観覧するMBS人気No.1無料アトラクション。</div>
-          <div class="ref-links" style="margin-top:10px;">
-            <a href="https://www.marinabaysands.com/attractions/spectra.html" target="_blank" class="ref-link">MBS公式ページ</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Garden Rhapsody -->
-      <div class="lightshow-card">
-        <div class="lightshow-header" style="background:linear-gradient(135deg,#0f4c35,#16a34a);">🌳 Garden Rhapsody — スーパーツリーショー</div>
-        <div class="lightshow-body">
-          <div class="ls-title">高さ25〜50mの巨大人工樹木がライトアップ</div>
-          <div class="ls-row">
-            <div>📍 Gardens by the Bay / Supertree Grove</div>
-            <div>🕐 <strong>毎日 19:45 / 20:45</strong>（各約15分）</div>
-            <div>💰 <strong>無料</strong>（Gardens入園料は不要）</div>
-            <div>🎨 5月テーマ：<strong>「World of Fantasy」</strong></div>
-            <div style="font-size:11px;color:#718096;">（魔法・宇宙・海・冒険をテーマにした光と音楽）</div>
-          </div>
-          <div style="font-size:11px;color:#718096;margin-top:6px;line-height:1.6;">月ごとにテーマが変わる。MBSから徒歩10〜15分。SpectraとセットでDay2夕食後に立ち寄れる動線。</div>
-          <div class="ref-links" style="margin-top:10px;">
-            <a href="https://www.gardensbythebay.com.sg/en/things-to-do/calendar-of-events/garden-rhapsody.html" target="_blank" class="ref-link">Gardens by the Bay公式</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="alert alert-yellow" style="margin-top:12px;font-size:12px;">
-      💡 <strong>動線メモ：</strong>PALM BEACH（18:30〜20:30）→ 徒歩5分でSpectra 21:00回 → 徒歩10分でGarden Rhapsody（20:45は終わっているため次の機会に）。または Day2/3のどちらかでGardens by the Bayを19:45に先に観てからSpectraへ移動するルートも。
-    </div>
-  </div>
-
   <!-- 実用メモ -->
-  <div class="section">
+  <div class="section collapsible-section">
     <div class="section-title"><div class="icon">💡</div>現地実用メモ</div>
     <div class="info-grid">
       <div class="info-card"><div class="ic-icon">🌡️</div><div class="ic-title">5月の気候</div><div class="ic-body">平均29.5℃・湿度84%。午後はスコールが多い。折りたたみ傘＋日焼け止め必携。12〜16時は屋内活動推奨。</div></div>
@@ -1305,9 +1438,35 @@
 
 </div>
 
-<div class="footer">シンガポール旅行プラン 2026.05.23〜26 ｜ SQ671/672 ｜ Wyndham Singapore Hotel × MBS 楽天ダイヤモンド特典フル活用</div>
+<div class="footer">シンガポール旅行プラン 2026.05.23〜26 ｜ SQ671/672 ｜ Wyndham Singapore Hotel × マリーナベイサンズ 楽天ダイヤモンド特典フル活用</div>
 
 <script>
+// アコーディオン
+function initCollapsible() {
+  document.querySelectorAll('.collapsible-section').forEach(section => {
+    const title = section.querySelector(':scope > .section-title');
+    if (!title) return;
+    const children = Array.from(section.children).filter(c => !c.classList.contains('section-title'));
+    const content = document.createElement('div');
+    content.className = 'collapsible-content';
+    children.forEach(child => content.appendChild(child));
+    content.style.display = 'none';
+    section.appendChild(content);
+    const arrow = document.createElement('span');
+    arrow.className = 'toggle-icon';
+    arrow.textContent = '▼';
+    title.style.marginBottom = '0';
+    title.appendChild(arrow);
+    title.addEventListener('click', () => {
+      const isOpen = content.style.display !== 'none';
+      content.style.display = isOpen ? 'none' : 'block';
+      arrow.classList.toggle('open', !isOpen);
+      title.style.marginBottom = isOpen ? '0' : '14px';
+    });
+  });
+}
+initCollapsible();
+
 // 期限切れチェック（2026年6月1日以降は非表示）
 (function() {
   const expiry = new Date('2026-06-01T00:00:00+09:00');
@@ -1347,13 +1506,18 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19
 }).addTo(map);
 
-function makeIcon(emoji, color) {
+function makeIcon(emoji, color, candidate = false) {
+  const border = candidate
+    ? 'border:2px dashed rgba(255,255,255,0.85);'
+    : 'border:3px solid white;';
+  const opacity = '';
   return L.divIcon({
     html: `<div style="
       background:${color};
       width:34px;height:34px;border-radius:50% 50% 50% 0;
       transform:rotate(-45deg);
-      border:3px solid white;
+      ${border}
+      ${opacity}
       box-shadow:0 2px 8px rgba(0,0,0,0.3);
       display:flex;align-items:center;justify-content:center;
     "><span style="transform:rotate(45deg);font-size:15px;line-height:1;">${emoji}</span></div>`,
@@ -1365,28 +1529,35 @@ function makeIcon(emoji, color) {
 }
 
 const spots = [
+  // ホテル
   { lat: 1.2914, lng: 103.8489, emoji: '🏨', color: '#2563eb', name: 'Wyndham Singapore Hotel（拠点）', desc: '3-5 Coleman Street, City Hall<br>最寄り：City Hall駅（徒歩3〜5分）' },
-  { lat: 1.2952, lng: 103.8523, emoji: '⌚', color: '#d97706', name: 'AP Café at Raffles Hotel', desc: 'Bar & Billiard Room内<br>営業 11:00〜20:00 ｜ 要予約<br>ホテルから徒歩5分' },
-  { lat: 1.2870, lng: 103.8596, emoji: '🎨', color: '#dc2626', name: 'ArtScience Museum（MBS）', desc: 'Marina Bay Sands内<br>楽天特典で無料 ｜ 10:00〜19:00' },
-  { lat: 1.2838, lng: 103.8605, emoji: '⛵', color: '#dc2626', name: 'Sampan Ride（MBS B2）', desc: 'The Shoppes at MBS 地下B2<br>楽天特典で無料 ｜ 要時間予約' },
-  { lat: 1.2836, lng: 103.8607, emoji: '🌅', color: '#dc2626', name: 'Skypark Observation Deck', desc: 'MBS Tower 3 56階<br>楽天特典で無料 ｜ 11:00〜21:00' },
-  { lat: 1.2865, lng: 103.8536, emoji: '🦀', color: '#16a34a', name: 'PALM BEACH Seafood', desc: 'One Fullerton（マーライオン公園隣）<br>Day2 18:30〜ディナー ｜ チリクラブ<br>MBSの夜景を眺めながら' },
-  { lat: 1.2869, lng: 103.8544, emoji: '🦁', color: '#16a34a', name: 'マーライオン公園', desc: '無料 ｜ 夜景・記念撮影スポット<br>PALM BEACHへの道すがら立ち寄り' },
-  { lat: 1.2804, lng: 103.8503, emoji: '🍜', color: '#16a34a', name: 'Lau Pa Sat（ラウパサ）', desc: 'Day1の夕食候補<br>屋台街 ｜ チキンライス・サテーなど<br>気軽に食べられる' },
-  { lat: 1.3048, lng: 103.8318, emoji: '🍗', color: '#16a34a', name: 'CHATTERBOX（ヒルトンオーチャード）', desc: 'Day3 ランチ 12:30〜<br>MRT City Hall→Orchard 7分・S$1<br>チキンライス・ラクサの名店' },
-  { lat: 1.2816, lng: 103.8636, emoji: '🌳', color: '#d97706', name: 'Garden Rhapsody（Gardens by the Bay）', desc: 'Supertree Grove ｜ <strong>毎日 19:45・20:45</strong><br>無料・約15分 ｜ 5月テーマ：World of Fantasy<br><small>MBSから徒歩10〜15分</small>' },
-  { lat: 1.2842, lng: 103.8582, emoji: '✨', color: '#7c3aed', name: 'Spectra（MBS 光と水のショー）', desc: 'MBS Event Plaza（The Shoppes 1F）<br><strong>日〜木 20:00・21:00 / 金土 +22:00</strong><br>無料・約15分 ｜ 雨天中止の場合あり' },
-  { lat: 1.3644, lng: 103.9915, emoji: '✈️', color: '#7c3aed', name: 'チャンギ空港', desc: 'Terminal 1：SQ671到着（5/23 16:00）<br>Terminal 2：SQ672出発（5/26 01:20）' },
-  // --- 検討中・参考スポット ---
-  { lat: 1.2889, lng: 103.8447, emoji: '🦀', color: '#0e7490', name: '🔵 JUMBO Seafood（Clarke Quay）', desc: '30 Merchant Rd, Riverside Point<br>チリクラブ ｜ 11:30〜14:30 / 17:30〜23:00<br>S$150〜200（2名）｜ 要予約<br><small>PALMBEACHの代替候補 ｜ 川沿いテラス席</small>' },
-  { lat: 1.2896, lng: 103.8569, emoji: '🍢', color: '#0e7490', name: '🔵 Makansutra Gluttons Bay（屋外ホーカー）', desc: 'エスプラネード・シアターズ横<br>17:00〜深夜2〜3時 ｜ S$30〜50（2名）<br>サテー・BBQエイ・チキンウィング<br><small>MBS夜景を見ながら屋外で食事できる</small>' },
-  { lat: 1.2803, lng: 103.8447, emoji: '🏮', color: '#0e7490', name: '🔵 Maxwell Food Centre（チャイナタウン）', desc: '1 Kadayanallur St ｜ 8:00〜22:00<br>S$5〜15/品 ｜ 天天海南鶏飯（ミシュランビブグルマン）<br><small>City Hallから Grab 10〜15分</small>' },
-  { lat: 1.2890, lng: 103.8478, emoji: '🍲', color: '#b45309', name: '⭐ Song Fa Bak Kut Teh（肉骨茶）', desc: '11 New Bridge Road ｜ ミシュランビブグルマン<br>9:00〜21:00 ｜ S$30〜40（2名）<br>白胡椒ペッパースープ ｜ スープお代わり自由<br><small>予約不要・City Hallから徒歩15分 or MRT1駅</small>' },
+  // 観光・アトラクション（確定）
+  { lat: 1.2952, lng: 103.8523, emoji: '⌚', color: '#dc2626', name: 'AP Café at Raffles Hotel', desc: 'Bar & Billiard Room内<br>営業 11:00〜20:00 ｜ ✅ 予約確定（16:00〜）<br>ホテルから徒歩5分' },
+  { lat: 1.2870, lng: 103.8596, emoji: '🎨', color: '#dc2626', candidate: true, name: 'ArtScience Museum（マリーナベイサンズ）', desc: 'Marina Bay Sands内<br>楽天特典で無料（要確認） ｜ 10:00〜19:00' },
+  { lat: 1.2838, lng: 103.8605, emoji: '⛵', color: '#dc2626', candidate: true, name: 'Sampan Ride（マリーナベイサンズ B2）', desc: 'The Shoppes at マリーナベイサンズ 地下B2<br>楽天特典で無料（要確認） ｜ 要時間予約' },
+  { lat: 1.2836, lng: 103.8607, emoji: '🌅', color: '#dc2626', candidate: true, name: 'Skypark Observation Deck', desc: 'マリーナベイサンズ Tower 3 56階<br>楽天特典で無料（要確認） ｜ 11:00〜21:00' },
+  { lat: 1.2869, lng: 103.8544, emoji: '🦁', color: '#dc2626', name: 'マーライオン公園', desc: '無料 ｜ 夜景・記念撮影スポット<br>マリーナベイサンズエリアから徒歩圏内' },
+  { lat: 1.2816, lng: 103.8636, emoji: '✨', color: '#dc2626', candidate: true, name: 'Gardens by the Bay（Garden Rhapsody）', desc: 'Supertree Grove ｜ <strong>毎日 19:45・20:45</strong><br>無料ライトショー・約15分 ｜ 5月テーマ：World of Fantasy<br><small>マリーナベイサンズから徒歩10〜15分</small>' },
+  // グルメ（確定）
+  { lat: 1.2869, lng: 103.8501, emoji: '🦀', color: '#16a34a', name: 'JUMBO Seafood The Riverwalk', desc: '20 Upper Circular Road, The Riverwalk<br>Day1 19:00〜ディナー ｜ チリクラブ＋揚げマントウ<br>✅ 予約確定' },
+  { lat: 1.3048, lng: 103.8318, emoji: '🍗', color: '#16a34a', name: 'CHATTERBOX（ヒルトンオーチャード）', desc: 'Day3 ランチ 12:30〜<br>MRT City Hall→Orchard 7分・S$1<br>チキンライス・ラクサの名店 ｜ ✅ 予約確定' },
+  // ライトショー・空港
+  { lat: 1.2842, lng: 103.8582, emoji: '✨', color: '#7c3aed', name: 'Spectra（マリーナベイサンズ 光と水のショー）', desc: 'マリーナベイサンズ Event Plaza（The Shoppes 1F）<br><strong>日〜木 20:00・21:00 / 金土 +22:00</strong><br>無料・約15分 ｜ 雨天中止の場合あり' },
+  { lat: 1.3644, lng: 103.9915, emoji: '✈️', color: '#7c3aed', name: 'チャンギ空港 / ジュエル', desc: 'Terminal 1：SQ671到着（5/23 16:00）<br>Terminal 2：SQ672出発（5/26 01:20）<br>Jewel：Day3夕食＋Rain Vortex' },
+  // グルメ候補
+  { lat: 1.2896, lng: 103.8569, emoji: '🍢', color: '#16a34a', candidate: true, name: 'Makansutra Gluttons Bay（屋外ホーカー）', desc: 'エスプラネード・シアターズ横<br>17:00〜深夜2〜3時 ｜ S$30〜50（2名）<br>サテー・BBQエイ・チキンウィング<br><small>マリーナベイサンズ夜景を見ながら屋外で食事できる</small>' },
+  { lat: 1.2803, lng: 103.8447, emoji: '🍢', color: '#16a34a', candidate: true, name: 'Maxwell Food Centre（B級グルメ屋台）', desc: '1 Kadayanallur St ｜ 8:00〜22:00<br>S$5〜15/品 ｜ ローカル屋台が集まるフードセンター<br>天天海南鶏飯（ミシュランビブグルマン）が有名<br><small>City Hallから Grab 10〜15分</small>' },
+  { lat: 1.2890, lng: 103.8478, emoji: '🍲', color: '#16a34a', candidate: true, name: 'Song Fa Bak Kut Teh（肉骨茶）', desc: '11 New Bridge Road ｜ ミシュランビブグルマン<br>9:00〜21:00 ｜ S$30〜40（2名）<br>白胡椒ペッパースープ ｜ スープお代わり自由<br><small>予約不要・City Hallから徒歩15分 or MRT1駅</small>' },
+  // 観光候補
+  { lat: 1.3014, lng: 103.8591, emoji: '📷', color: '#dc2626', candidate: true, name: 'アラブストリート（Haji Lane）', desc: 'マスジット・スルタン周辺のイスラム文化エリア<br>カラフルなHaji Lane・雑貨・カフェ・壁画<br>MRTブギス駅から徒歩約10分<br><small>City HallからMRT EW線2駅</small>' },
+  { lat: 1.3049, lng: 103.9050, emoji: '📷', color: '#dc2626', candidate: true, name: 'カトン地区（Katong / Joo Chiat）', desc: 'ペラナカン文化の発祥地 ｜ カラフルな洋館が続く<br>写真映えスポット ｜ East Coast Road<br>カトンラクサ発祥の地でもある<br><small>City HallからGrab約15〜20分</small>' },
+  // カフェ候補
+  { lat: 1.3036, lng: 103.8318, emoji: '☕', color: '#16a34a', candidate: true, name: 'Prada Café（プラダ カフェ）', desc: 'ION Orchard 2F・PRADAブティック内<br>要予約 ｜ ロンドンとシンガポールのみ<br><small>MRT Orchard駅直結</small>' },
 ];
 
 const markers = [];
 spots.forEach(s => {
-  const marker = L.marker([s.lat, s.lng], { icon: makeIcon(s.emoji, s.color) })
+  const marker = L.marker([s.lat, s.lng], { icon: makeIcon(s.emoji, s.color, s.candidate || false) })
     .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:12px;color:#555;">${s.desc}</span>`, { maxWidth: 220 })
     .addTo(map);
   markers.push(marker);
