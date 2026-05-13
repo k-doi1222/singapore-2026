@@ -274,6 +274,28 @@
     .info-card .ic-title { font-size: 12px; font-weight: 700; margin-bottom: 3px; color: #1a3a5c; }
     .info-card .ic-body { font-size: 12px; color: #718096; line-height: 1.7; }
 
+    /* 天気予報 */
+    .weather-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+    @media(max-width:600px){ .weather-grid { grid-template-columns: 1fr; } }
+    .weather-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .weather-card-header { padding: 10px 14px; color: white; }
+    .wc-day { font-size: 11px; font-weight: 700; opacity: 0.85; }
+    .wc-date { font-size: 13px; font-weight: 800; }
+    .weather-card-body { padding: 14px 12px 12px; }
+    .wc-icon { font-size: 30px; text-align: center; margin-bottom: 6px; }
+    .wc-temp-row { display: flex; justify-content: center; gap: 14px; margin-bottom: 5px; }
+    .wc-high { font-size: 21px; font-weight: 800; color: #e53e3e; }
+    .wc-sep { font-size: 18px; color: #cbd5e0; align-self: center; }
+    .wc-low { font-size: 21px; font-weight: 700; color: #3182ce; }
+    .wc-condition { font-size: 12px; font-weight: 700; color: #2d3748; text-align: center; margin-bottom: 8px; }
+    .wc-detail { font-size: 11px; color: #718096; line-height: 1.6; border-top: 1px solid #f0f4f8; padding-top: 8px; }
+    .wc-humidity { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: #4a5568; background: #ebf8ff; border-radius: 6px; padding: 2px 7px; margin-top: 6px; }
+    .weather-tips { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin-top: 4px; }
+    .weather-tip-item { background: white; border-radius: 10px; padding: 10px 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; gap: 8px; align-items: flex-start; }
+    .wti-icon { font-size: 18px; flex-shrink: 0; }
+    .wti-body { font-size: 12px; color: #4a5568; line-height: 1.5; }
+    .wti-body strong { display: block; font-size: 12px; color: #2d3748; margin-bottom: 2px; }
+
     /* アコーディオン */
     .collapsible-section > .section-title { cursor: pointer; user-select: none; }
     .toggle-icon { margin-left: auto; font-size: 13px; color: #a0aec0; transition: transform 0.2s; flex-shrink: 0; }
@@ -544,6 +566,112 @@
           <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#888;opacity:0.6;border:2px dashed rgba(80,80,80,0.7);margin-right:3px;vertical-align:middle;"></span>破線＝候補</span>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- 天気予報 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🌤️</div>
+      滞在期間の天気予報（5月23日〜25日）
+    </div>
+
+    <div class="alert alert-yellow" style="margin-bottom:14px;font-size:12px;">
+      ⛈️ <strong>5月下旬は「スコール」に注意。</strong>毎日ほぼ午後〜夕方に激しい雷雨が発生します。折りたたみ傘は必携。「スマトラスコール」は朝方に突然の強風と豪雨をもたらすこともあります。屋外予定は午前中に入れておくと安心。
+    </div>
+
+    <!-- 日別天気カード -->
+    <div class="weather-grid">
+      <!-- Day 1 -->
+      <div class="weather-card">
+        <div class="weather-card-header" style="background:linear-gradient(135deg,#667eea,#764ba2);">
+          <div class="wc-day">Day 1 ｜ 到着日</div>
+          <div class="wc-date">5月23日（土）</div>
+        </div>
+        <div class="weather-card-body">
+          <div class="wc-icon">🌤️⛈️</div>
+          <div class="wc-temp-row">
+            <span class="wc-high">33°</span>
+            <span class="wc-sep">/</span>
+            <span class="wc-low">27°</span>
+          </div>
+          <div class="wc-condition">晴れ時々曇り・午後スコール</div>
+          <div class="wc-detail">到着は16:00。スコール後は涼しくなることも。空港内でコンビニ傘を買っておくと安心。JUMBO夕食時は雨上がりの可能性。</div>
+          <div><span class="wc-humidity">💧 湿度 約84%</span></div>
+        </div>
+      </div>
+      <!-- Day 2 -->
+      <div class="weather-card">
+        <div class="weather-card-header" style="background:linear-gradient(135deg,#f093fb,#f5576c);">
+          <div class="wc-day">Day 2 ｜ メイン観光日</div>
+          <div class="wc-date">5月24日（日）</div>
+        </div>
+        <div class="weather-card-body">
+          <div class="wc-icon">⛅⛈️</div>
+          <div class="wc-temp-row">
+            <span class="wc-high">30°</span>
+            <span class="wc-sep">/</span>
+            <span class="wc-low">27°</span>
+          </div>
+          <div class="wc-condition">曇り・午後〜夕方スコール</div>
+          <div class="wc-detail">MBSは屋内中心なので雨でも快適。AP Café（16:00〜）の後に夕方スコールが来る可能性あり。Raffles Hotel内で雨宿りも◎</div>
+          <div><span class="wc-humidity">💧 湿度 約84%</span></div>
+        </div>
+      </div>
+      <!-- Day 3 -->
+      <div class="weather-card">
+        <div class="weather-card-header" style="background:linear-gradient(135deg,#4facfe,#00c6ff);">
+          <div class="wc-day">Day 3 ｜ 最終日</div>
+          <div class="wc-date">5月25日（月）</div>
+        </div>
+        <div class="weather-card-body">
+          <div class="wc-icon">🌤️⛈️</div>
+          <div class="wc-temp-row">
+            <span class="wc-high">29°</span>
+            <span class="wc-sep">/</span>
+            <span class="wc-low">27°</span>
+          </div>
+          <div class="wc-condition">晴れ時々曇り・午後スコール</div>
+          <div class="wc-detail">Skyparkは午前中のうちに。オーチャードは屋内モール中心なので雨でも安心。ジュエルは完全屋内。</div>
+          <div><span class="wc-humidity">💧 湿度 約84%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 服装・持ち物チップス -->
+    <div style="font-size:12px;font-weight:700;color:#1a3a5c;margin-bottom:8px;">👗 服装・持ち物アドバイス</div>
+    <div class="weather-tips">
+      <div class="weather-tip-item">
+        <span class="wti-icon">👕</span>
+        <div class="wti-body"><strong>薄手の長袖</strong>紫外線が非常に強い。屋外では長袖・UVカット素材が◎。屋内のエアコン対策にも。</div>
+      </div>
+      <div class="weather-tip-item">
+        <span class="wti-icon">☂️</span>
+        <div class="wti-body"><strong>折りたたみ傘（必須）</strong>スコールは急に来て短時間で止む。コンパクト傘を常に携帯。</div>
+      </div>
+      <div class="weather-tip-item">
+        <span class="wti-icon">🧴</span>
+        <div class="wti-body"><strong>日焼け止め（SPF50+推奨）</strong>赤道直下でUV指数は最高レベル。屋外移動のたびに塗り直しを。</div>
+      </div>
+      <div class="weather-tip-item">
+        <span class="wti-icon">👟</span>
+        <div class="wti-body"><strong>濡れてもOKな靴</strong>スコール後は路面が濡れる。レザー靴より防水スニーカーが快適。</div>
+      </div>
+      <div class="weather-tip-item">
+        <span class="wti-icon">🧊</span>
+        <div class="wti-body"><strong>冷房対策の羽織もの</strong>MBS・オーチャード・ジュエルの屋内は冷房が強い。薄いカーディガン1枚あると◎。</div>
+      </div>
+      <div class="weather-tip-item">
+        <span class="wti-icon">💧</span>
+        <div class="wti-body"><strong>水分補給をこまめに</strong>湿度84%・気温30℃超。屋外では15〜20分ごとに水分を。コンビニは至る所にあり。</div>
+      </div>
+    </div>
+
+    <div class="ref-links" style="margin-top:12px;">
+      <span class="ref-links-label">参考：</span>
+      <a href="https://www.weather.gov.sg/weather-fortnightly-outlook/" target="_blank" class="ref-link">シンガポール気象局（公式）</a>
+      <a href="https://www.accuweather.com/en/sg/singapore/300597/may-weather/300597" target="_blank" class="ref-link">AccuWeather Singapore</a>
+      <a href="https://www.kkday.com/ja/blog/51277/asia-singapore-may" target="_blank" class="ref-link">5月のシンガポール気候・服装ガイド</a>
     </div>
   </div>
 
