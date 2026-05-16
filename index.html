@@ -723,14 +723,14 @@
           <div class="wc-date">5月23日（土）</div>
         </div>
         <div class="weather-card-body">
-          <div class="wc-icon">🌤️⛈️</div>
+          <div class="wc-icon">🌧️⛈️</div>
           <div class="wc-temp-row">
-            <span class="wc-high">33°</span>
+            <span class="wc-high">30°</span>
             <span class="wc-sep">/</span>
-            <span class="wc-low">27°</span>
+            <span class="wc-low">24°</span>
           </div>
-          <div class="wc-condition">晴れ時々曇り・午後スコール</div>
-          <div class="wc-detail">到着は16:00。スコール後は涼しくなることも。空港内でコンビニ傘を買っておくと安心。JUMBO夕食時は雨上がりの可能性。</div>
+          <div class="wc-condition">一日を通じてにわか雨・朝夜に雨強め</div>
+          <div class="wc-detail">到着は16:00。到着後すぐ傘が必要になる可能性あり。空港到着ロビーで傘を確保しておくと安心。JUMBO夕食時も傘を携帯して。</div>
           <div><span class="wc-humidity">💧 湿度 約84%</span></div>
         </div>
       </div>
@@ -741,14 +741,14 @@
           <div class="wc-date">5月24日（日）</div>
         </div>
         <div class="weather-card-body">
-          <div class="wc-icon">⛅⛈️</div>
+          <div class="wc-icon">🌦️⛅</div>
           <div class="wc-temp-row">
-            <span class="wc-high">30°</span>
+            <span class="wc-high">31°</span>
             <span class="wc-sep">/</span>
-            <span class="wc-low">27°</span>
+            <span class="wc-low">26°</span>
           </div>
-          <div class="wc-condition">曇り・午後〜夕方スコール</div>
-          <div class="wc-detail">MBSは屋内中心なので雨でも快適。AP Café（16:00〜）の後に夕方スコールが来る可能性あり。Raffles Hotel内で雨宿りも◎</div>
+          <div class="wc-condition">朝ににわか雨、午後は比較的回復</div>
+          <div class="wc-detail">MBSは屋内中心なので朝の雨も快適に過ごせる。午後は回復傾向で観光しやすい。AP Café（16:00〜）前後は晴れ間が期待できるかも。</div>
           <div><span class="wc-humidity">💧 湿度 約84%</span></div>
         </div>
       </div>
@@ -759,14 +759,14 @@
           <div class="wc-date">5月25日（月）</div>
         </div>
         <div class="weather-card-body">
-          <div class="wc-icon">🌤️⛈️</div>
+          <div class="wc-icon">🌧️🌤️</div>
           <div class="wc-temp-row">
-            <span class="wc-high">29°</span>
+            <span class="wc-high">31°</span>
             <span class="wc-sep">/</span>
-            <span class="wc-low">27°</span>
+            <span class="wc-low">24°</span>
           </div>
-          <div class="wc-condition">晴れ時々曇り・午後スコール</div>
-          <div class="wc-detail">Skyparkは午前中のうちに。オーチャードは屋内モール中心なので雨でも安心。ジュエルは完全屋内。</div>
+          <div class="wc-condition">朝に雨・午後晴れ間あり・夕方回復</div>
+          <div class="wc-detail">午前中は雨の可能性あり。CHATTERBOX（12:30〜）前後は午後の晴れ間を活かしてオーチャード散策を。夕方はジュエル（完全屋内）なので安心。</div>
           <div><span class="wc-humidity">💧 湿度 約84%</span></div>
         </div>
       </div>
@@ -799,6 +799,17 @@
         <span class="wti-icon">💧</span>
         <div class="wti-body"><strong>水分補給をこまめに</strong>湿度84%・気温30℃超。屋外では15〜20分ごとに水分を。コンビニは至る所にあり。</div>
       </div>
+    </div>
+
+    <!-- ライブ天気取得 -->
+    <div id="live-weather-box" style="margin-top:16px;background:#f0f7ff;border:1.5px solid #93c5fd;border-radius:12px;padding:14px 16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <span style="font-size:13px;font-weight:700;color:#1a3a5c;">🔴 LIVE 予報（自動取得）</span>
+        <span id="live-weather-status" style="font-size:11px;color:#64748b;">読み込み中...</span>
+        <button onclick="fetchLiveWeather()" style="margin-left:auto;font-size:11px;background:#2563eb;color:white;border:none;border-radius:6px;padding:3px 10px;cursor:pointer;">🔄 再取得</button>
+      </div>
+      <div id="live-weather-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;"></div>
+      <div style="font-size:10px;color:#94a3b8;margin-top:8px;">出典: <a href="https://open-meteo.com/" target="_blank" style="color:#64748b;">Open-Meteo</a>（無料・無認証・自動更新）</div>
     </div>
 
     <div class="ref-links" style="margin-top:12px;">
@@ -1848,6 +1859,69 @@ map.fitBounds(group.getBounds().pad(0.08));
 // 外部プレビュー環境でのサイズ再計算（htmlpreview等対応）
 setTimeout(() => { map.invalidateSize(); map.fitBounds(group.getBounds().pad(0.08)); }, 300);
 window.addEventListener('load', () => { map.invalidateSize(); map.fitBounds(group.getBounds().pad(0.08)); });
+
+// ========== ライブ天気取得（Open-Meteo API） ==========
+const WMO_CODE = {
+  0:'☀️ 快晴', 1:'🌤️ ほぼ晴れ', 2:'⛅ 一部曇り', 3:'☁️ 曇り',
+  45:'🌫️ 霧', 48:'🌫️ 霧(着氷)',
+  51:'🌦️ 霧雨(弱)', 53:'🌦️ 霧雨', 55:'🌧️ 霧雨(強)',
+  61:'🌧️ 小雨', 63:'🌧️ 雨', 65:'🌧️ 大雨',
+  71:'🌨️ 小雪', 73:'🌨️ 雪', 75:'❄️ 大雪',
+  80:'🌦️ にわか雨(弱)', 81:'🌧️ にわか雨', 82:'⛈️ にわか雨(強)',
+  95:'⛈️ 雷雨', 96:'⛈️ 雷雨+ひょう', 99:'⛈️ 激しい雷雨+ひょう'
+};
+const TRIP_DAYS = [
+  { date:'2026-05-23', label:'Day 1', sub:'到着日（土）' },
+  { date:'2026-05-24', label:'Day 2', sub:'観光メイン（日）' },
+  { date:'2026-05-25', label:'Day 3', sub:'最終日（月）' }
+];
+
+function fetchLiveWeather() {
+  const statusEl = document.getElementById('live-weather-status');
+  const gridEl   = document.getElementById('live-weather-grid');
+  statusEl.textContent = '取得中...';
+  gridEl.innerHTML = '';
+
+  const url = 'https://api.open-meteo.com/v1/forecast'
+    + '?latitude=1.29&longitude=103.85'
+    + '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode'
+    + '&timezone=Asia%2FSingapore'
+    + '&start_date=2026-05-23&end_date=2026-05-25';
+
+  fetch(url)
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(data => {
+      const { time, temperature_2m_max, temperature_2m_min, precipitation_probability_max, weathercode } = data.daily;
+      gridEl.innerHTML = '';
+      TRIP_DAYS.forEach((d, i) => {
+        const idx = time.indexOf(d.date);
+        if (idx === -1) return;
+        const hi   = Math.round(temperature_2m_max[idx]);
+        const lo   = Math.round(temperature_2m_min[idx]);
+        const rain = precipitation_probability_max[idx];
+        const wmo  = weathercode[idx];
+        const desc = WMO_CODE[wmo] || ('コード ' + wmo);
+        gridEl.innerHTML += `
+          <div style="background:white;border-radius:10px;padding:10px 12px;border:1px solid #dbeafe;text-align:center;">
+            <div style="font-size:11px;font-weight:700;color:#1a3a5c;">${d.label}</div>
+            <div style="font-size:10px;color:#64748b;margin-bottom:4px;">${d.sub}</div>
+            <div style="font-size:18px;margin:4px 0;">${desc.split(' ')[0]}</div>
+            <div style="font-size:13px;font-weight:700;color:#dc2626;">${hi}°<span style="color:#94a3b8;font-weight:400;font-size:11px;">/${lo}°</span></div>
+            <div style="font-size:10px;color:#555;margin-top:2px;">${desc.replace(/^.\S+ /, '')}</div>
+            <div style="font-size:10px;color:#2563eb;margin-top:3px;">🌂 降水確率 ${rain}%</div>
+          </div>`;
+      });
+      const now = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' });
+      statusEl.textContent = `最終更新: ${now}`;
+    })
+    .catch(err => {
+      statusEl.textContent = '取得失敗（オフラインまたはAPIエラー）';
+      gridEl.innerHTML = '<div style="font-size:12px;color:#ef4444;grid-column:1/-1;">天気情報を取得できませんでした。ネットワーク接続を確認してください。</div>';
+    });
+}
+
+// ページ読み込み時に自動取得
+window.addEventListener('load', fetchLiveWeather);
 </script>
 </body>
 </html>
