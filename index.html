@@ -1739,12 +1739,12 @@ function initCollapsible() {
     const content = document.createElement('div');
     content.className = 'collapsible-content';
     children.forEach(child => content.appendChild(child));
-    content.style.display = 'none';
+    content.style.display = 'block';
     section.appendChild(content);
     const arrow = document.createElement('span');
-    arrow.className = 'toggle-icon';
+    arrow.className = 'toggle-icon open';
     arrow.textContent = '▼';
-    title.style.marginBottom = '0';
+    title.style.marginBottom = '14px';
     title.appendChild(arrow);
     title.addEventListener('click', () => {
       const isOpen = content.style.display !== 'none';
