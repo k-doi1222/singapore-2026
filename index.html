@@ -210,10 +210,15 @@
 
     /* 日程カード */
     .day-card { background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 24px; }
-    .day-header { padding: 14px 20px; color: white; display: flex; align-items: center; gap: 14px; }
+    .day-header { padding: 14px 20px; color: white; display: flex; align-items: center; gap: 14px; position: relative; overflow: hidden; min-height: 90px; }
+    .day-header::before { content: ''; position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.25; }
+    .day-header > * { position: relative; z-index: 1; }
     .day-header.day1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .day-header.day1::before { background-image: url('https://images.unsplash.com/photo-1591931026170-58c27598c298?w=900&h=200&fit=crop&auto=format'); }
     .day-header.day2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+    .day-header.day2::before { background-image: url('https://images.unsplash.com/photo-1551441467-4d0f1120ee64?w=900&h=200&fit=crop&auto=format'); }
     .day-header.day3 { background: linear-gradient(135deg, #4facfe, #00c6ff); }
+    .day-header.day3::before { background-image: url('https://images.unsplash.com/photo-1581601442673-c3370bb99d8d?w=900&h=200&fit=crop&auto=format'); }
     .day-number { font-size: 34px; font-weight: 900; opacity: 0.3; line-height: 1; }
     .day-info .day-label { font-size: 16px; font-weight: 700; }
     .day-info .day-date { font-size: 12px; opacity: 0.85; margin-top: 2px; }
@@ -332,6 +337,32 @@
     <span>👫 夫婦2名</span>
     <span>💎 楽天ダイヤモンド特典</span>
     <span>⌚ AP Café at Raffles</span>
+  </div>
+</div>
+
+<!-- フォトストリップ -->
+<div style="background:#0f1e30;padding:10px 0 0;overflow:hidden;">
+  <div style="display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding:0 4px 4px;">
+    <div style="flex:0 0 auto;position:relative;border-radius:8px;overflow:hidden;height:130px;width:220px;">
+      <img src="https://images.unsplash.com/photo-1551441467-4d0f1120ee64?w=440&h=260&fit=crop&auto=format" alt="マリーナベイサンズ夜景" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:5px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.65));color:white;font-size:10px;font-weight:600;">🏙️ マリーナベイサンズ</div>
+    </div>
+    <div style="flex:0 0 auto;position:relative;border-radius:8px;overflow:hidden;height:130px;width:220px;">
+      <img src="https://images.unsplash.com/photo-1562474541-07ed748b1d46?w=440&h=260&fit=crop&auto=format" alt="スーパーツリー夜景" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:5px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.65));color:white;font-size:10px;font-weight:600;">🌳 スーパーツリー グローブ</div>
+    </div>
+    <div style="flex:0 0 auto;position:relative;border-radius:8px;overflow:hidden;height:130px;width:220px;">
+      <img src="https://images.unsplash.com/photo-1560673095-0d2188c8ab55?w=440&h=260&fit=crop&auto=format" alt="ジュエルチャンギ レインボルテックス" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:5px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.65));color:white;font-size:10px;font-weight:600;">💧 ジュエル レイン ボルテックス</div>
+    </div>
+    <div style="flex:0 0 auto;position:relative;border-radius:8px;overflow:hidden;height:130px;width:220px;">
+      <img src="https://images.unsplash.com/photo-1565967511849-76a60a516170?w=440&h=260&fit=crop&auto=format" alt="マーライオン夜景" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:5px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.65));color:white;font-size:10px;font-weight:600;">🦁 マーライオン</div>
+    </div>
+    <div style="flex:0 0 auto;position:relative;border-radius:8px;overflow:hidden;height:130px;width:220px;">
+      <img src="https://images.unsplash.com/photo-1581601442673-c3370bb99d8d?w=440&h=260&fit=crop&auto=format" alt="チキンライス" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:5px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.65));color:white;font-size:10px;font-weight:600;">🍗 チキンライス</div>
+    </div>
   </div>
 </div>
 
@@ -1230,6 +1261,7 @@
       <!-- Spectra -->
       <div class="lightshow-card">
         <div class="lightshow-header" style="background:linear-gradient(135deg,#1a3a5c,#7c3aed);">💧 Spectra — 光・水・レーザーショー</div>
+        <div style="height:140px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1570422849852-adf15f981007?w=600&h=280&fit=crop&auto=format" alt="マリーナベイサンズ夜景" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="lightshow-body">
           <div class="ls-title">Marina Bay Sands主催の大型無料ショー</div>
           <div class="ls-row">
@@ -1249,6 +1281,7 @@
       <!-- Garden Rhapsody -->
       <div class="lightshow-card">
         <div class="lightshow-header" style="background:linear-gradient(135deg,#0f4c35,#16a34a);">🌳 Garden Rhapsody — スーパーツリーショー</div>
+        <div style="height:140px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1562474541-07ed748b1d46?w=600&h=280&fit=crop&auto=format" alt="スーパーツリー夜景" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="lightshow-body">
           <div class="ls-title">高さ25〜50mの巨大人工樹木がライトアップ</div>
           <div class="ls-row">
